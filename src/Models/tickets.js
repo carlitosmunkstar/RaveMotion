@@ -1,18 +1,20 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  sequelize.define('ticket', {
+  sequelize.define("Ticket", {
     id: {
       type: DataTypes.UUID,
-      primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
     },
+
     eventId: {
       type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       references: {
-        model: 'event', 
-        key: 'id',
+        model: "Events",
+        key: "id",
       },
     },
     name: {
@@ -32,7 +34,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     accessType: {
-      type: DataTypes.ENUM('general', 'vip', 'early_bird', 'backstage'),
+      type: DataTypes.ENUM("general", "vip", "early_bird", "backstage"),
       allowNull: false,
     },
     sells: {
@@ -40,7 +42,5 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: 0,
     },
-  },{
-    timestamps: false,
   });
-}
+};
