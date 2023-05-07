@@ -10,7 +10,7 @@ cloudinary.config({
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Events",
+    "Event",
     {
       id: {
         type: DataTypes.UUID,

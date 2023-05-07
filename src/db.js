@@ -37,14 +37,19 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 const {Users, Ticket } = sequelize.models;
 
-//! aca abajo se definen las relaciones
 
+modelDefiners.forEach((model) => model(sequelize));
+
+const { Events, Users, Tickets } = sequelize.models;
+
+//! aca abajo se definen las relaciones
 //? un usuario puede tener ciertos tickets 
 //? pero ciertos tickets solo pueden pertenecer a un solo usuario
 Users.hasMany(Ticket);
 Ticket.belongsTo(Users);
 
 // Events.hasMany(Tickets)
+
 
 module.exports = {
   sequelize,
