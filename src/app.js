@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const routes = require('./Routes/index.js');
 
 
 const server=express();
@@ -14,6 +15,8 @@ server.use((req, res, next) => {
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
     next();
   });
+
+  server.use('/', routes);
 
   server.use((err, req, res, next) => { 
     const status = err.status || 500;

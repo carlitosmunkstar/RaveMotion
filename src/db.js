@@ -21,10 +21,7 @@ const modelDefiners = [];
 //* hace un require a todos los archivos adentro de la carpeta Models
 //* este fragmento de codigo lo saque de db.js que nos dieron en el pi
 fs.readdirSync(path.join(__dirname, "/Models"))
-  .filter(
-    (file) =>
-      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
-  )
+  .filter((file) => (file.indexOf(".") !== 0) && (file !== basename) && (file.slice(-3) === ".js"))
   .forEach((file) => {
     modelDefiners.push(require(path.join(__dirname, "/Models", file)));
   });
@@ -36,17 +33,15 @@ let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].s
 sequelize.models = Object.fromEntries(capsEntries);
 
 
-modelDefiners.forEach((model) => model(sequelize));
-
-const { Events, Users, Tickets } = sequelize.models;
+const { Event, User, Ticket } = sequelize.models;
 
 //! aca abajo se definen las relaciones
 //? un usuario puede tener ciertos tickets 
 //? pero ciertos tickets solo pueden pertenecer a un solo usuario
-Users.hasMany(Ticket);
-Ticket.belongsTo(Users);
 
-// Events.hasMany(Tickets)
+User.hasMany(Ticket);
+Ticket.belongsTo(User);
+Event.hasMany(Ticket);
 
 
 module.exports = {
