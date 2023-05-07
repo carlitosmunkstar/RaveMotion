@@ -1,8 +1,9 @@
-const { Router } = require('express');
-const getEvents = require('../Controllers/GetEvents');
+const { Router } = require("express");
+const getEvents = require("../Controllers/GetEvents");
+const createEvents = require("../Controllers/createEvents");
+const router = Router();
 
-const router=Router();
+router.get("/", getEvents);
+router.post("/eventcreate", createEvents);
 
-router.get('/', getEvents)
-
-module.exports=router;
+module.exports = router;
