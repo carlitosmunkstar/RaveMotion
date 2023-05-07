@@ -1,17 +1,19 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  sequelize.define('ticket', {
+  sequelize.define('Tickets', {
     id: {
       type: DataTypes.UUID,
-      primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+      
     },
     eventId: {
       type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       references: {
-        model: 'event', 
+        model: 'Events', 
         key: 'id',
       },
     },
