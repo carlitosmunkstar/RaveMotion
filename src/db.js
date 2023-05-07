@@ -28,12 +28,28 @@ fs.readdirSync(path.join(__dirname, "/Models"))
   .forEach((file) => {
     modelDefiners.push(require(path.join(__dirname, "/Models", file)));
   });
+// Injectamos la conexion (sequelize) a todos los modelos
+modelDefiners.forEach(model => model(sequelize));
+// Capitalizamos los nombres de los modelos ie: product => Product
+let entries = Object.entries(sequelize.models);
+let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
+sequelize.models = Object.fromEntries(capsEntries);
+
+const {Users, Ticket } = sequelize.models;
+
 
 modelDefiners.forEach((model) => model(sequelize));
 
 const { Events, Users, Tickets } = sequelize.models;
 
 //! aca abajo se definen las relaciones
+//? un usuario puede tener ciertos tickets 
+//? pero ciertos tickets solo pueden pertenecer a un solo usuario
+Users.hasMany(Ticket);
+Ticket.belongsTo(Users);
+
+// Events.hasMany(Tickets)
+
 
 module.exports = {
   sequelize,

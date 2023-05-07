@@ -7,7 +7,6 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-
     eventId: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
