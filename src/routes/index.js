@@ -1,7 +1,9 @@
 const { Router } = require("express");
 const router = Router();
-const createEvents = require("../Controllers/createEvents");
+const events=require('./events');
+const users=require('./users')
 
-router.post("/events", createEvents);
+router.use("/events", events);
+router.use("/users", users);
 
 module.exports = router;

@@ -44,7 +44,7 @@ const createEvents = async (req, res) => {
         });
     }
   } catch (error) {
-    res.status(500).json({ error: console.log(req) });
+    res.status(500).json({error:error.message});
   }
 };
 
