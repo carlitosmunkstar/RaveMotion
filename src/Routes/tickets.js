@@ -1,10 +1,14 @@
 const { Router } = require("express");
-const PostTickets = require("../Controllers/Tickets/PostTickets");
+const PostUserTickets = require("../Controllers/Tickets/PostUserTickets");
+const getUserTickets = require("../Controllers/Tickets/GetUserTickets");
 const getTickets = require("../Controllers/Tickets/GetTickets");
+const createTickets = require("../Controllers/Tickets/CreateTickets");
+const router = Router();
 
-const router=Router();
 
-router.get("/", getTickets)
-router.post("/newTickets", PostTickets)
+router.get("/", getTickets);
+router.get("/userTickets", getUserTickets)
+router.post("/newUserTickets", PostUserTickets)
+router.post("/createtickets", createTickets);
 
-module.exports=router;
+module.exports = router;
