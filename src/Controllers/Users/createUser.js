@@ -10,7 +10,6 @@ const postUser = async (req, res) => {
       documentType,
       document,
       birthDay,
-      cellPhone,
       userType,
     } = req.body;
     if (
@@ -21,7 +20,6 @@ const postUser = async (req, res) => {
       !documentType ||
       !document ||
       !birthDay ||
-      !cellPhone ||
       !userType
     ) {
       res.status(200).json({ message: "faltan datos" });
@@ -36,7 +34,6 @@ const postUser = async (req, res) => {
           documentType: documentType,
           document: document,
           birthDay: birthDay,
-          cellPhone: cellPhone,
           userType: userType,
         },
       });

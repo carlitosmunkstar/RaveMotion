@@ -8,4 +8,5 @@ const router = Router();
 router.get("/singUp", singUp);
 router.post("/singUp", postUser);
 router.put("/:email", putUsers);
+
 module.exports = router;
