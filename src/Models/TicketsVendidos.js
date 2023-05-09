@@ -28,6 +28,10 @@ module.exports=(sequelize)=>{
             type: DataTypes.ENUM("general", "vip", "early_bird", "backstage"),
             allowNull: false,
         },
+        price: {
+          type: DataTypes.FLOAT,
+          allowNull: false,
+        },
         qrImage:{
           type: DataTypes.STRING,
           allowNull: false
