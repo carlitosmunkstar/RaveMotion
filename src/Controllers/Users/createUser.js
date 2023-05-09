@@ -50,6 +50,5 @@ const postUser = async (req, res) => {
     res.status(500).json({ message: "algo salio mal" });
   }
 };
-module.exports = {
-  postUser,
-};
+module.exports = postUser
+

@@ -1,11 +1,12 @@
 const { Router } = require("express");
-const getEvents = require("../Controllers/GetEvents");
-const getEventByName= require("../Controllers/GetEventByName")
-const createEvents = require("../Controllers/createEvents");
-const getEventById = require("../Controllers/GetEventById");
-const deleteEvents = require("../Controllers/DeleteEvents");
-const putEvents = require("../Controllers/PutEvents")
+const getEvents = require("../Controllers/Events/GetEvents");
+const getEventByName= require("../Controllers/Events/GetEventByName")
+const createEvents = require("../Controllers/Events/createEvents");
+const getEventById = require("../Controllers/Events/GetEventById");
+const deleteEvents = require("../Controllers/Events/DeleteEvents");
+const putEvents = require("../Controllers/Events/PutEvents")
 const router = Router();
+
 
 router.get("/", getEvents);
 router.get("/:id", getEventById);
