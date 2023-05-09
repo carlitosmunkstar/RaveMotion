@@ -5,7 +5,7 @@ const putUsers = require("../Controllers/Users/PutUsers");
 
 const router = Router();
 
-router.get("/singUp", singUp);
+router.get("/Loging", singUp);
 router.post("/singUp", postUser);
 router.put("/:email", putUsers);
 
