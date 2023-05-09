@@ -1,4 +1,4 @@
-const { Event } = require("../db");
+const { Event } = require("../../db");
 
 const createEvents = async (req, res) => {
   try {

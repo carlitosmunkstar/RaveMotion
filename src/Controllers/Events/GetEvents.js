@@ -1,4 +1,4 @@
-const {Event, Ticket}=require('../db.js')
+const {Event, Ticket}=require('../../db.js')
 
 const getEvents=async(req,res)=>{
     try {

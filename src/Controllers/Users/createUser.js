@@ -1,4 +1,4 @@
-const { User } = require("../db");
+const { User } = require("../../db");
 
 const postUser = async (req, res) => {
   try {
@@ -51,5 +51,5 @@ const postUser = async (req, res) => {
   }
 };
 module.exports = {
-    postUser
-}
+  postUser,
+};

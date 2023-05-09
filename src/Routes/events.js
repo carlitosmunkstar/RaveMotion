@@ -4,7 +4,7 @@ const getEventByName= require("../Controllers/GetEventByName")
 const createEvents = require("../Controllers/createEvents");
 const getEventById = require("../Controllers/GetEventById");
 const deleteEvents = require("../Controllers/DeleteEvents");
-const putEvents= require("../Controllers/PutEvents")
+const putEvents = require("../Controllers/PutEvents")
 const router = Router();
 
 router.get("/", getEvents);
