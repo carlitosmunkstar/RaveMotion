@@ -44,9 +44,23 @@ const { Event, User, Tickets } = sequelize.models;
 //? un usuario puede tener ciertos tickets
 //? pero ciertos tickets solo pueden pertenecer a un solo usuario
 
+//todo Realción uno a varios entre User y Tickets
+
 User.hasMany(Tickets);
-Tickets.belongsTo(User);
-Event.hasMany(Tickets);
+Tickets.belongsTo(User, {
+  foreignKey: "userId",
+});
+
+//todo Relación uno a varios entre Event y Tickets
+Event.hasMany(Tickets, {
+  foreignKey: "eventId",
+  onDelete: "CASCADE", //? cuando se elimina un evento se eliminan todos los tickes asociados
+});
+Tickets.belongsTo(Event, {
+  foreignKey: "eventId",
+});
+
+
 
 module.exports = {
   sequelize,
