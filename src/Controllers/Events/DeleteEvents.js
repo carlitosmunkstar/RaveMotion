@@ -1,4 +1,4 @@
-const { Event } = require("../db");
+const { Event } = require("../../db");
 
 const deleteEvents = async (req, res) => {
   try {

@@ -1,4 +1,4 @@
-const {Event}=require('../db');
+const {Event}=require('../../db');
 
 const getEventById=async(req,res)=>{
     const {id}=req.params;
