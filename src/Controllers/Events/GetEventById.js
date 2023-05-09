@@ -3,7 +3,7 @@ const {Event}=require('../../db');
 const getEventById=async(req,res)=>{
     const {id}=req.params;
     try {
-        const event=Event.findByPk(id);
+        const event=await Event.findByPk(id);
         if(event){
             res.status(200).json(event)
         }else{

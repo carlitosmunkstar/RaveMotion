@@ -2,7 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const routes = require("./routes/events");
+const routes = require("./routes/index.js");
 
 const server = express();
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
