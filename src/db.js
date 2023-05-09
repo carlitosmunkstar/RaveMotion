@@ -38,7 +38,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Event, User, Tickets } = sequelize.models;
+const { Event, User, Tickets, TicketsVendidos } = sequelize.models;
 
 //! aca abajo se definen las relaciones
 //? un usuario puede tener ciertos tickets
