@@ -10,8 +10,6 @@ const postUser = async (req, res) => {
       documentType,
       document,
       birthDay,
-      cellPhone,
-      userType,
     } = req.body;
     if (
       !firstName ||
@@ -20,15 +18,13 @@ const postUser = async (req, res) => {
       !password ||
       !documentType ||
       !document ||
-      !birthDay ||
-      !cellPhone ||
-      !userType
+      !birthDay
     ) {
       res.status(200).json({ message: "faltan datos" });
     } else {
       let [user, create] = await User.findOrCreate({
         where: { mail: mail, document: document },
-        default: {
+        defaults: {
           firstName: firstName,
           lastName: lastName,
           mail: mail,
@@ -36,18 +32,16 @@ const postUser = async (req, res) => {
           documentType: documentType,
           document: document,
           birthDay: birthDay,
-          cellPhone: cellPhone,
-          userType: userType,
         },
       });
       if (!create) {
         res.status(200).json({ message: "ese usuario ya se encuentra creado" });
       } else {
-        res.status(200).json({ message: "el usuario se creo correctamente" });
+        res.status(200).json(user);
       }
     }
   } catch (error) {
-    res.status(500).json({ message: "algo salio mal" });
+    res.status(500).json({ error:error.message });
   }
 };
 module.exports = postUser

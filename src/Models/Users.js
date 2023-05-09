@@ -74,11 +74,6 @@ module.exports = (sequelize) => {
           },
         },
       },
-      cellPhone: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        unique: true,
-      },
       userType: {
         type: DataTypes.ENUM("user", "productor", "rrpp", "admin"),
         allowNull: false,

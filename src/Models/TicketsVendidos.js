@@ -28,6 +28,13 @@ module.exports=(sequelize)=>{
             type: DataTypes.ENUM("general", "vip", "early_bird", "backstage"),
             allowNull: false,
         },
-        //! aca falta el campo para guardar el qr
+        price: {
+          type: DataTypes.FLOAT,
+          allowNull: false,
+        },
+        qrImage:{
+          type: DataTypes.STRING,
+          allowNull: false
+        }
     })
 }
