@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const singUp = require("../Controllers/Users/SingUp");
 const postUser = require("../Controllers/Users/createUser");
+const putUsers = require("../Controllers/Users/PutUsers");
 
 const router = Router();
 
