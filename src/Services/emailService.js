@@ -4,24 +4,22 @@ const sendEmail = async (recipient, subject, message) => {
   try {
     // Configura las opciones de transporte
     const transporter = nodemailer.createTransport({
-      host: "smtp.example.com", // Reemplaza con el host de tu proveedor de correo
-      port: 587, // El puerto a utilizar, verifica la documentación de tu proveedor
-      secure: false, // Si el puerto es 465, cambia a true, de lo contrario déjalo en false
+      service: 'gmail', // Usa el servicio de Gmail
       auth: {
-        user: "your-email@example.com", // Reemplaza con tu correo electrónico
-        pass: "your-email-password", // Reemplaza con la contraseña de tu correo electrónico
+        user: "torresfacundo.lt@gmail.com", // Reemplaza con tu correo electrónico de Gmail
+        pass: "cwbocpbsnimnijhj", // Reemplaza con la contraseña de tu correo electrónico de Gmail
       },
     });
 
     // Configura las opciones de correo electrónico
     const mailOptions = {
-      from: "your-email@example.com", // Reemplaza con tu correo electrónico
+      from: "your-email@example.com", // Reemplaza con tu correo electrónico de Gmail
       to: recipient,
       subject: subject,
       text: message,
     };
 
-   
+    // Enviar el correo electrónico
     await transporter.sendMail(mailOptions);
     console.log("Email enviado");
   } catch (error) {
