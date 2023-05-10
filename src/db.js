@@ -39,27 +39,38 @@ let capsEntries = entries.map((entry) => [
 sequelize.models = Object.fromEntries(capsEntries);
 
 
-const { Event, User, Tickets, TicketsVendidos } = sequelize.models;
+const { Event, User, Ticket, TicketsSold } = sequelize.models;
 
 //! aca abajo se definen las relaciones
 //? un usuario puede tener ciertos tickets
 //? pero ciertos tickets solo pueden pertenecer a un solo usuario
 
-//todo Realción uno a varios entre User y Tickets
+//todo Relación uno a varios entre Tickes y TicketsSold
+Ticket.hasMany(TicketsSold)
+TicketsSold.belongsTo(Ticket, {
+  foreignKey:"ticketId"
+})
 
-User.hasMany(Tickets);
-Tickets.belongsTo(User, {
+//todo Realción uno a varios entre User(comprador) y TicketsSold
+User.hasMany(TicketsSold);
+TicketsSold.belongsTo(User, {
   foreignKey: "userId",
 });
 
 //todo Relación uno a varios entre Event y Tickets
-Event.hasMany(Tickets, {
+Event.hasMany(Ticket, {
   foreignKey: "eventId",
   onDelete: "CASCADE", //? cuando se elimina un evento se eliminan todos los tickes asociados
 });
-Tickets.belongsTo(Event, {
+Ticket.belongsTo(Event, {
   foreignKey: "eventId",
 });
+
+//todo Relación uno a varios entre User(productora) y Event
+User.hasMany(Event);
+Event.belongsTo(User, {
+  foreignKey: "userId",
+})
 
 
 

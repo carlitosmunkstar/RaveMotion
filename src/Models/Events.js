@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const cloudinary = require("cloudinary").v2;
+const moment=require('moment')
 const { CLOUD_NAME, CLOUD_API_KEY, CLOUD_API_SECRET } = process.env;
 
 cloudinary.config({
@@ -17,13 +18,27 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
+      userId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        references: {
+          model: "Users",
+          key: "id",
+        },
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          len: [1, 50],
+        },
       },
-      imagen: {
+      image: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          isUrl: true
+        }
       },
       description: {
         type: DataTypes.TEXT,
@@ -32,6 +47,14 @@ module.exports = (sequelize) => {
       date: {
         type: DataTypes.DATEONLY,
         allowNull: false,
+        validate:{
+          futureDate(value){
+            let currentDate=moment().format('YYYY-MM-DD');
+            if(!moment(value).isAfter(currentDate)){
+              throw new Error('La fecha debe ser futura');
+            }
+          }
+        }
       },
       hour: {
         type: DataTypes.TIME,
@@ -40,17 +63,23 @@ module.exports = (sequelize) => {
       venue: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          len: [1, 50],
+        },
       },
       producer: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          len: [1, 150], // Define un mínimo de 1 y un máximo de 150 caracteres
+          len: [1, 20],
         },
       },
+      status:{
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      }
     },
     {
-      timestamps: false,
       hooks: {
         //! antes de crear el Evento en la bdd, se sube la imagen a cloudinary y en imagen, se guarda un string con la url
         async beforeCreate(event) {

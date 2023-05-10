@@ -16,14 +16,14 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          len: [1, 50], // Define un mínimo de 1 y un máximo de 50 caracteres
+          len: [1, 25],
         },
       },
       lastName: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          len: [1, 50], // Define un mínimo de 1 y un máximo de 50 caracteres
+          len: [1, 25], 
         },
       },
       mail: {
@@ -52,13 +52,16 @@ module.exports = (sequelize) => {
         },
       },
       documentType: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM("DNI", "Pasaporte", "Cedula"),
         allowNull: false,
       },
       document: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+        validate: {
+          len: [1, 10],
+        },
       },
       birthDay: {
         type: DataTypes.DATE,
@@ -74,12 +77,26 @@ module.exports = (sequelize) => {
           },
         },
       },
-      userType: {
+      adress:{
+        type: DataTypes.JSON,
+        allowNull: false,
+        validate:{
+          validation(value){
+            if(!value.localidad || !value.calle || !value.numero){
+              throw new Error ('Faltan datos')
+            }
+          }
+        }
+      },
+      accessType: {
         type: DataTypes.ENUM("user", "productor", "rrpp", "admin"),
         allowNull: false,
         defaultValue: "user",
       },
-    },
-    { timestamps: false }
+      status:{
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      }
+    }
   );
 };

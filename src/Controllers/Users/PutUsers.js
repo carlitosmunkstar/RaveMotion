@@ -1,16 +1,17 @@
 const { User } = require("../../db.js");
 
 const updateUserByEmail = async (req, res) => {
-  const { email } = req.params;
+  //const { mail } = req.params;
   const updatedUserData = req.body;
-
+  console.log(updatedUserData);
   try {
-    const user = await User.findOne({ where: { email: email } });
+    const user = await User.findOne({ where: { mail: updatedUserData.mail } });
 
     if (user) {
-      const updatedUser = await User.update(updatedUserData, {
-        where: { email: email },
+      await User.update(updatedUserData, {
+        where: { mail: updatedUserData.mail },
       });
+      const updatedUser = await User.findOne({ where: { mail: updatedUserData.mail } });
       res.status(200).json(updatedUser);
     } else {
       
