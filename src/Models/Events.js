@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const cloudinary = require("cloudinary").v2;
+const moment=require('moment')
 const { CLOUD_NAME, CLOUD_API_KEY, CLOUD_API_SECRET } = process.env;
 
 cloudinary.config({
@@ -46,7 +47,14 @@ module.exports = (sequelize) => {
       date: {
         type: DataTypes.DATEONLY,
         allowNull: false,
-        //* validacion para fecha futura
+        validate:{
+          futureDate(value){
+            let currentDate=moment().format('YYYY-MM-DD');
+            if(!moment(value).isAfter(currentDate)){
+              throw new Error('La fecha debe ser futura');
+            }
+          }
+        }
       },
       hour: {
         type: DataTypes.TIME,

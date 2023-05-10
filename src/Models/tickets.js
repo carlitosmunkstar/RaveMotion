@@ -50,7 +50,13 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0,
-      //* validacion que no sea mayor a maxQuantity
+      validate:{
+        maxQuantity(value){
+          if(value>this.getDataValue('maxQuantity')){
+            throw new Error('La cantidad vendida no puede superar el máximo de tickets')
+          }
+        }
+      }
     },
     status:{
       type: DataTypes.BOOLEAN,
