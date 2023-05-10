@@ -79,7 +79,14 @@ module.exports = (sequelize) => {
       },
       adress:{
         type: DataTypes.JSON,
-        allowNull: false
+        allowNull: false,
+        validate:{
+          validation(value){
+            if(!value.localidad || !value.calle || !value.numero){
+              throw new Error ('Faltan datos')
+            }
+          }
+        }
       },
       accessType: {
         type: DataTypes.ENUM("user", "productor", "rrpp", "admin"),

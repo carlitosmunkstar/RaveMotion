@@ -10,6 +10,7 @@ const postUser = async (req, res) => {
       documentType,
       document,
       birthDay,
+      adress,
     } = req.body;
     if (
       !firstName ||
@@ -18,9 +19,12 @@ const postUser = async (req, res) => {
       !password ||
       !documentType ||
       !document ||
-      !birthDay
+      !birthDay ||
+      !adress.localidad ||
+      !adress.numero ||
+      !adress.calle
     ) {
-      res.status(200).json({ message: "faltan datos" });
+      res.status(200).json("Faltan datos");
     } else {
       let [user, create] = await User.findOrCreate({
         where: { mail: mail, document: document },
@@ -32,6 +36,7 @@ const postUser = async (req, res) => {
           documentType: documentType,
           document: document,
           birthDay: birthDay,
+          adress: adress,
         },
       });
       if (!create) {
