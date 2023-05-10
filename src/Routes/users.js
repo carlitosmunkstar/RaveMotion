@@ -7,6 +7,6 @@ const router = Router();
 
 router.get("/Loging", singUp);
 router.post("/singUp", postUser);
-router.put("/:email", putUsers);
+router.put("/edit", putUsers);
 
 module.exports = router;
