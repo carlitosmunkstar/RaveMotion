@@ -1,9 +1,9 @@
-const {TicketsVendidos}=require('../../db');
+const {TicketsSold}=require('../../db');
 
 const PostTickets=async(req,res)=>{
     const {tickets}=req.body;
     try {
-        const createdTickets = await TicketsVendidos.bulkCreate(tickets);
+        const createdTickets = await TicketsSold.bulkCreate(tickets);
         if(createdTickets){
             res.status(200).json(createdTickets);
         }else{

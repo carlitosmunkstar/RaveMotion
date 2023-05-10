@@ -84,8 +84,8 @@ module.exports = (sequelize) => {
         //! antes de crear el Evento en la bdd, se sube la imagen a cloudinary y en imagen, se guarda un string con la url
         async beforeCreate(event) {
           try {
-            const result = await cloudinary.uploader.upload(event.imagen);
-            event.imagen = result.secure_url;
+            const result = await cloudinary.uploader.upload(event.image);
+            event.image = result.secure_url;
           } catch (error) {
             throw new Error("Error al cargar la imagen en Cloudinary");
           }
