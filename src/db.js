@@ -72,6 +72,9 @@ Event.belongsTo(User, {
   foreignKey: "userId",
 })
 
+//todo Relación varios a varios entre Tickets y User(comprador) a travez de la tabla ticketsSold
+Ticket.belongsToMany(User, { through: TicketsSold });
+User.belongsToMany(Ticket, { through: TicketsSold });
 
 
 module.exports = {
