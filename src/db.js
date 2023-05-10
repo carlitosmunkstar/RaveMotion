@@ -51,7 +51,7 @@ TicketsSold.belongsTo(Ticket, {
   foreignKey:"ticketId"
 })
 
-//todo Realción uno a varios entre User(comprador) y TicketsSold
+//todo Relación uno a varios entre User(comprador) y TicketsSold
 User.hasMany(TicketsSold);
 TicketsSold.belongsTo(User, {
   foreignKey: "userId",
