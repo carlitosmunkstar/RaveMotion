@@ -37,3 +37,4 @@ const createTickets = async (req, res) => {
 };
 
 module.exports = createTickets;
+//* actualizar a bulkcreate
