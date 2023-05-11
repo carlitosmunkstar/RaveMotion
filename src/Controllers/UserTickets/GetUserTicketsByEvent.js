@@ -1,13 +1,14 @@
-const {TicketsSold, Event}=require('../../db');
+const {TicketsSold, Event, Ticket}=require('../../db');
 
 const getTickets=async(req,res)=>{
     const {eventId}=req.params
     try {
         const tickets=await TicketsSold.findAll({
-            include: [
-                {model: Event,
-                where: { id: eventId }}
-            ]});
+            where:{eventId:eventId},
+            include: [{
+                model: Ticket,
+                attributes:['name']
+                }]});
         if(tickets){
             res.status(200).json(tickets)    
         }else{

@@ -1,4 +1,4 @@
-# Documentación rutas del maldtio back
+# Documentación rutas del maldito back
 
 ## Rutas del modelo Event
 
@@ -152,6 +152,54 @@ POST
 http://localhost:3001/tickets/createtickets
 
 expected:
+JSON por body
+{
+	 "tickets":[
+		 {
+		 "eventId":"166c02cc-835c-485c-b7ef-168921c9237b",
+      "name":"Tanda 1",
+      "description":"aaaa",
+      "maxQuantity":100,
+      "price": 200,
+      "accessType":"vip"
+	 		},
+		 {
+		 "eventId":"166c02cc-835c-485c-b7ef-168921c9237b",
+      "name":"Tanda 2",
+      "description":"aaaa",
+      "maxQuantity":100,
+      "price": 200,
+      "accessType":"vip"
+	 		}
+	 ]
+}
+es un array de objetos, donde cada objeto es la tanda del evento
+
+recived:
+[
+	{
+		"id": "7d83257a-8910-4f9d-9cdf-d2cbf364960b",
+		"sells": 0,
+		"status": true,
+		"eventId": "166c02cc-835c-485c-b7ef-168921c9237b",
+		"name": "Tanda 1",
+		"description": "aaaa",
+		"maxQuantity": 100,
+		"price": 200,
+		"accessType": "vip"
+	},
+	{
+		"id": "2aa7811b-9df0-4b70-b747-43ee856da249",
+		"sells": 0,
+		"status": true,
+		"eventId": "166c02cc-835c-485c-b7ef-168921c9237b",
+		"name": "Tanda 2",
+		"description": "aaaa",
+		"maxQuantity": 100,
+		"price": 200,
+		"accessType": "vip"
+	}
+]
 
 
 ````
@@ -356,6 +404,38 @@ recived:
 
 ````
 
+### Get TicketInfo by Id
+````
+GET
+http://localhost:3001/userTickets/ticketInfo/:id
+
+expected:
+id del ticketSold por params
+
+recived:
+{
+	"id": "2d65e022-d28e-4e51-a5f5-31c9a6379146",
+	"ticketId": "bc2e8637-46e9-4868-9b38-bf99967f0d76",
+	"userId": "79b155bd-a885-4276-b18c-5306444f81be",
+	"eventId": "145ea81b-c70d-48b1-a61f-0c63eb3e6c7c",
+	"qrImage": "https://res.cloudinary.com/dv8oxhsmk/raw/upload/v1683823430/code%2B2d65e.png",
+	"mail": "mai2l@gmail.com",
+	"validate": false,
+	"createdAt": "2023-05-11T16:43:47.941Z",
+	"updatedAt": "2023-05-11T16:43:47.941Z",
+	"TicketId": null,
+	"UserId": null,
+	"EventId": null,
+	"Ticket": {
+		"name": "Tanda 2",
+		"accessType": "vip"
+	},
+	"Event": {
+		"name": "MegaJoda"
+	}
+}
+````
+
 ### Get ticketsSold By User
 ````
 GET
@@ -367,18 +447,24 @@ id del usuario por params
 recived:
 [
 	{
-		"id": "deba9ff7-a5c9-419b-8a62-9f4cd21015a1",
-		"ticketId": "720a6505-5f44-4236-95b7-46c6118debd8",
-		"userId": "2f24a9dc-c88c-4501-89f5-80ac3ff9273e",
-		"qrImage": "https://res.cloudinary.com/dv8oxhsmk/raw/upload/v1683820805/code%2Bdeba9.png",
+		"id": "2d65e022-d28e-4e51-a5f5-31c9a6379146",
+		"ticketId": "bc2e8637-46e9-4868-9b38-bf99967f0d76",
+		"userId": "79b155bd-a885-4276-b18c-5306444f81be",
+		"eventId": "145ea81b-c70d-48b1-a61f-0c63eb3e6c7c",
+		"qrImage": "https://res.cloudinary.com/dv8oxhsmk/raw/upload/v1683823430/code%2B2d65e.png",
 		"mail": "mai2l@gmail.com",
 		"validate": false,
-		"createdAt": "2023-05-11T16:00:03.357Z",
-		"updatedAt": "2023-05-11T16:00:03.357Z",
+		"createdAt": "2023-05-11T16:43:47.941Z",
+		"updatedAt": "2023-05-11T16:43:47.941Z",
 		"TicketId": null,
 		"UserId": null,
+		"EventId": null,
 		"Ticket": {
-			"accessType": "vip"
+			"accessType": "vip",
+			"name": "Tanda 2"
+		},
+		"Event": {
+			"name": "MegaJoda"
 		}
 	}
 ]
@@ -397,20 +483,53 @@ id de la tanda por params
 recived:
 [
 	{
-		"id": "deba9ff7-a5c9-419b-8a62-9f4cd21015a1",
-		"ticketId": "720a6505-5f44-4236-95b7-46c6118debd8",
-		"userId": "2f24a9dc-c88c-4501-89f5-80ac3ff9273e",
-		"qrImage": "https://res.cloudinary.com/dv8oxhsmk/raw/upload/v1683820805/code%2Bdeba9.png",
+		"id": "2d65e022-d28e-4e51-a5f5-31c9a6379146",
+		"ticketId": "bc2e8637-46e9-4868-9b38-bf99967f0d76",
+		"userId": "79b155bd-a885-4276-b18c-5306444f81be",
+		"eventId": "145ea81b-c70d-48b1-a61f-0c63eb3e6c7c",
+		"qrImage": "https://res.cloudinary.com/dv8oxhsmk/raw/upload/v1683823430/code%2B2d65e.png",
 		"mail": "mai2l@gmail.com",
 		"validate": false,
-		"createdAt": "2023-05-11T16:00:03.357Z",
-		"updatedAt": "2023-05-11T16:00:03.357Z",
+		"createdAt": "2023-05-11T16:43:47.941Z",
+		"updatedAt": "2023-05-11T16:43:47.941Z",
 		"TicketId": null,
 		"UserId": null,
+		"EventId": null,
 		"Ticket": {
-			"sells": 10
+			"sells": 0,
+			"name": "Tanda 2"
 		}
 	}
 ]
 cada objeto adentro del array es un ticket vendido de la tanda
+````
+
+### Get tickets sold By Event
+````
+GET
+http://localhost:3001/userTickets/eventUserTickets/:eventId
+
+expected:
+id del evento por params
+
+recived:
+[
+	{
+		"id": "2d65e022-d28e-4e51-a5f5-31c9a6379146",
+		"ticketId": "bc2e8637-46e9-4868-9b38-bf99967f0d76",
+		"userId": "79b155bd-a885-4276-b18c-5306444f81be",
+		"eventId": "145ea81b-c70d-48b1-a61f-0c63eb3e6c7c",
+		"qrImage": "https://res.cloudinary.com/dv8oxhsmk/raw/upload/v1683823430/code%2B2d65e.png",
+		"mail": "mai2l@gmail.com",
+		"validate": false,
+		"createdAt": "2023-05-11T16:43:47.941Z",
+		"updatedAt": "2023-05-11T16:43:47.941Z",
+		"TicketId": null,
+		"UserId": null,
+		"EventId": null,
+		"Ticket": {
+			"name": "Tanda 2"
+		}
+	}
+]
 ````

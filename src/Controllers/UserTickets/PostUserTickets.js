@@ -29,8 +29,8 @@ const {
     try {
       const resultados = await Promise.all(
         tickets.map(async (ticket) => {
-          if(!ticket.userId||!ticket.ticketId||!ticket.mail||!ticket.price){
-            res.status(400).json({error:"Su solicitud no se puede procesar, asegurese que los datos requeridos sean correctos."})
+          if(!ticket.eventId||!ticket.userId||!ticket.ticketId||!ticket.mail){
+            return res.status(400).json({error:"Su solicitud no se puede procesar, asegurese que los datos requeridos sean correctos."})
           }
 
           const codigo_ticket = uuidv4();
