@@ -66,6 +66,12 @@ Ticket.belongsTo(Event, {
   foreignKey: "eventId",
 });
 
+//todo 
+Event.hasMany(TicketsSold);
+TicketsSold.belongsTo(Event, {
+  foreignKey: "eventId",
+});
+
 //todo Relación uno a varios entre User(productora) y Event
 User.hasMany(Event);
 Event.belongsTo(User, {

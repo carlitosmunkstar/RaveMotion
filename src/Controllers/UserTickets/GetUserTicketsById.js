@@ -1,21 +1,27 @@
-const { TicketsSold, User, Ticket } = require("../../db");
+const {TicketsSold, Ticket, Event}=require('../../db');
 
-const getUserTicketsByID = async (req, res) => {
-    const {userId} = req.params;
-  try {
-    const userTickets = await TicketsSold.findAll({
-      where:{userId: userId},
-      include:[{
-        model:Ticket,
-        attributes: ['accessType']}]});
-    if(userTickets){
-      res.status(200).json(userTickets);
-    }else{
-      res.status(400).json('No se encontraron ticket para este usuario')
+const getTicketsById=async(req,res)=>{
+    const {id}=req.params;
+    try {
+        const ticket=await TicketsSold.findByPk(id,
+            {include:[
+                {model:Ticket,
+                attributes:['name','accessType']
+                },
+                {model:Event,
+                attributes:['name']
+                }
+            ]});
+
+        if(ticket){
+            res.status(200).json(ticket)
+        }else{
+            res.status(400).json('No se encontro un ticket')
+        }
+        
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+}
 
-module.exports = getUserTicketsByID;
+module.exports=getTicketsById;

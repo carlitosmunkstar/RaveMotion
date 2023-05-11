@@ -7,7 +7,7 @@ const getUserTicketsByTanda=async(req,res)=>{
             where:{ticketId:ticketId},
             include:[{
                 model:Ticket,
-                attributes: ['sells']}]
+                attributes: ['sells', 'name']}]
         })
         if(birdTickets){
             res.status(200).json(birdTickets);
