@@ -31,6 +31,11 @@ module.exports=(sequelize)=>{
             isUrl: true
           }
         },
+        mail: {
+          type: DataTypes.STRING,
+          allowNull: false,
+          validate: { isEmail: true },
+        },
         validate:{
           type: DataTypes.BOOLEAN,
           defaultValue: false,
