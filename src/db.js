@@ -48,7 +48,7 @@ const { Event, User, Ticket, TicketsSold } = sequelize.models;
 //todo Relación uno a varios entre Tickes y TicketsSold
 Ticket.hasMany(TicketsSold)
 TicketsSold.belongsTo(Ticket, {
-  foreignKey:"ticketId"
+  foreignKey:"ticketId",
 })
 
 //todo Relación uno a varios entre User(comprador) y TicketsSold
@@ -73,8 +73,9 @@ Event.belongsTo(User, {
 })
 
 //todo Relación varios a varios entre Tickets y User(comprador) a travez de la tabla ticketsSold
-Ticket.belongsToMany(User, { through: TicketsSold });
-User.belongsToMany(Ticket, { through: TicketsSold });
+Ticket.belongsToMany(User, { through: TicketsSold});
+User.belongsToMany(Ticket, { through: TicketsSold});
+
 
 
 module.exports = {
