@@ -20,9 +20,9 @@ const postUser = async (req, res) => {
       !documentType ||
       !document ||
       !birthDay ||
-      !adress.localidad ||
-      !adress.numero ||
-      !adress.calle
+      !adress.street ||
+      !adress.number ||
+      !adress.city
     ) {
       res.status(200).json("Faltan datos");
     } else {

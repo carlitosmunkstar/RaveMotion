@@ -1,11 +1,13 @@
-const { TicketsSold, User } = require("../../db");
+const { TicketsSold, User, Ticket } = require("../../db");
 
 const getUserTicketsByID = async (req, res) => {
     const {userId} = req.params;
   try {
     const userTickets = await TicketsSold.findAll({
       where:{userId: userId},
-      include:[User]});
+      include:[{
+        model:Ticket,
+        attributes: ['accessType']}]});
     if(userTickets){
       res.status(200).json(userTickets);
     }else{
