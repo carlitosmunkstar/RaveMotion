@@ -5,7 +5,9 @@ const getUserTicketsByTanda=async(req,res)=>{
     try {
         const birdTickets=await TicketsSold.findAll({
             where:{ticketId:ticketId},
-            include:[Ticket]
+            include:[{
+                model:Ticket,
+                attributes: ['sells']}]
         })
         if(birdTickets){
             res.status(200).json(birdTickets);
