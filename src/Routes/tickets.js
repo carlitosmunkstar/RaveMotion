@@ -6,7 +6,7 @@ const getTicketsById = require("../Controllers/Tickets/GetTicketsById");
 const router = Router();
 
 router.get("/", getTickets);
-router.get("/ticketsByEvent/:id", getTicketsById);
+router.get("/ticketsByEvent/:eventId", getTicketsById);
 router.post("/createtickets", createTickets);
 
 module.exports = router;

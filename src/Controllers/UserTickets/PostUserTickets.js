@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require("uuid"); // generador de clave unica
 const fs = require("fs"); // manejo de carpetas y archivos
 const cloudinary = require("cloudinary").v2; // carga de archivos en cloudinary
 const tmp = require("tmp"); // generador de archivos temporales para cargar en cloudinary
+const { error } = require('console');
 
 const {
     CLOUD_NAME,
@@ -21,10 +22,17 @@ const {
   const PostTickets = async (req, res) => {
     const { tickets } = req.body;
     let newTickets = [];
-  
+  /*"userId":"96365d2f-0f00-40c6-b9f7-c20359ef3e41",
+			"ticketId":"a9b633e3-0f29-4f6f-975e-e3b8af8f590c",
+        "mail":"chiringuito@gmail.com",
+				"price":22000,*/
     try {
       const resultados = await Promise.all(
         tickets.map(async (ticket) => {
+          if(!ticket.eventId||!ticket.userId||!ticket.ticketId||!ticket.mail){
+            return res.status(400).json({error:"Su solicitud no se puede procesar, asegurese que los datos requeridos sean correctos."})
+          }
+
           const codigo_ticket = uuidv4();
   
           // Generar el código QR usando la librería qrcode

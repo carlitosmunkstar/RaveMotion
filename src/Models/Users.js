@@ -82,7 +82,7 @@ module.exports = (sequelize) => {
         allowNull: false,
         validate:{
           validation(value){
-            if(!value.localidad || !value.calle || !value.numero){
+            if(!value.city || !value.street || !value.number){
               throw new Error ('Faltan datos')
             }
           }

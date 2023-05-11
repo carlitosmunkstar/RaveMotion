@@ -9,7 +9,6 @@ module.exports=(sequelize)=>{
           },
         ticketId: {
             type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
             allowNull: false,
             references: {
               model: "Tickets",
@@ -23,6 +22,14 @@ module.exports=(sequelize)=>{
               model: "Users",
               key: "id",
             },
+        },
+        eventId: {
+          type: DataTypes.UUID,
+          allowNull: false,
+          references: {
+            model: "Events",
+            key: "id",
+          },
         },
         qrImage:{
           type: DataTypes.STRING,
