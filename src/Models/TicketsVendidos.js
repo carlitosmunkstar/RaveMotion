@@ -31,6 +31,12 @@ module.exports=(sequelize)=>{
             isUrl: true
           }
         },
+        accessType: {
+          type: DataTypes.STRING,
+          validate: {
+            len: [1, 50],
+          }
+      },
         mail: {
           type: DataTypes.STRING,
           allowNull: false,
