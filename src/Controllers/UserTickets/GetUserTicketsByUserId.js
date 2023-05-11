@@ -9,7 +9,7 @@ const getUserTicketsByID = async (req, res) => {
         model:Ticket,
         attributes: ['accessType','name']},
         {model: Event,
-        attributes:['name']}
+        attributes:['name','date']}
       ]});
     if(userTickets){
       res.status(200).json(userTickets);
