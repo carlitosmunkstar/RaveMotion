@@ -407,7 +407,7 @@ recived:
 ### Get TicketInfo by Id
 ````
 GET
-http://localhost:3001/userTickets/ticketInfo/:id
+http://localhost:3001/userTickets/ticketsInfo/:id
 
 expected:
 id del ticketSold por params
