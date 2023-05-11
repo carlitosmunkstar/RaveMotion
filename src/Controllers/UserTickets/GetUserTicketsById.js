@@ -9,7 +9,7 @@ const getTicketsById=async(req,res)=>{
                 attributes:['name','accessType']
                 },
                 {model:Event,
-                attributes:['name']
+                attributes:['name','date']
                 }
             ]});
 
