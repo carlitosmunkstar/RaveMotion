@@ -46,6 +46,7 @@ module.exports = (sequelize) => {
       },
       date: {
         type: DataTypes.DATE,
+      
         get() {
           const rawValue = this.getDataValue('date');
           if (rawValue) {
@@ -56,7 +57,12 @@ module.exports = (sequelize) => {
         set(value) {
           const formattedValue = moment(value, 'DD-MM-YYYY').format('YYYY-MM-DD');
           this.setDataValue('date', formattedValue);
-        }
+        },  validate: {
+          futureDate(value) {
+            let currentDate = moment().format('YYYY-MM-DD');
+            if (!moment(value, 'YYYY-MM-DD').isAfter(currentDate, 'YYYY-MM-DD')) {
+              throw new Error('La fecha debe ser futura');
+            }}},
       },
       hour: {
         type: DataTypes.TIME,
