@@ -48,7 +48,6 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          isDate: true,
           futureDate(value) {
             let currentDate = moment().format('YYYY-MM-DD');
             if (!moment(value, 'DD-MM-YYYY').isAfter(currentDate, 'YYYY-MM-DD')) {
