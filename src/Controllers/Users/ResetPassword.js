@@ -1,68 +1,34 @@
 const { User } = require("../../db");
-const crypto = require("crypto");
-const jwt = require("jsonwebtoken");
 const sendEmail = require("../../Services/emailService");
-
-const sendRecoveryCode = async (req, res) => {
-  try {
-    const { mail } = req.body;
-
-    if (!mail) {
-      return res.status(400).json({ message: "Falta el correo electrónico" });
-    }
-
-    const user = await User.findOne({ where: { mail } });
-
-    if (!user) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
-    }
-
-    const code = crypto.randomBytes(4).toString("hex");
-    const token = jwt.sign({ code, mail }, "your-secret-key");
-
-    await sendEmail(user.mail, "Código de recuperación de contraseña", `Tu código de recuperación es: ${code}\nPor favor, ingrésalo en la página de recuperación.`);
-
-    res.status(200).json({ message: "Correo electrónico enviado", token });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+const jwt = require("jsonwebtoken");
 
 const resetPassword = async (req, res) => {
   try {
-    const { token, code, newPassword } = req.body;
+    const { mail } = req.body;
 
-    if (!token || !code || !newPassword) {
-      return res.status(400).json({ message: "Faltan datos" });
-    }
-
-    let decoded;
-    try {
-      decoded = jwt.verify(token, "your-secret-key");
-    } catch (error) {
-      return res.status(403).json({ message: "Token inválido" });
-    }
-
-    if (decoded.code !== code) {
-      return res.status(403).json({ message: "Código incorrecto" });
-    }
-
-    const user = await User.findOne({ where: { mail: decoded.mail } });
-
+    // Encuentra al usuario por correo electrónico
+    const user = await User.findOne({ where: { mail } });
     if (!user) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
+      return res.status(400).json({ message: "No existe un usuario con ese correo electrónico." });
     }
 
-    await user.update({ password: newPassword });
+    // Genera un token de restablecimiento de contraseña
+    const resetPasswordToken = jwt.sign(
+      { userId: user.id, resetPassword: true },
+      process.env.JWT_SECRET,
+      { expiresIn: '1h' } // 1 hora de duración
+    );
 
-    res.status(200).json({ message: "Contraseña actualizada" });
+    // Envía un correo electrónico al usuario con el token
+    const subject = "Restablecimiento de contraseña";
+    const message = `Haz clic en el siguiente enlace para restablecer tu contraseña: http://localhost:3001/resetpassword/${resetPasswordToken}`;
+    await sendEmail(user.mail, subject, message);
+
+    res.json({ message: "Correo electrónico de restablecimiento de contraseña enviado." });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error(error);
+    res.status(500).json({ message: "Hubo un error al intentar restablecer la contraseña." });
   }
 };
 
-module.exports = {
-  sendRecoveryCode,
-  resetPassword,
-};
-
+module.exports = resetPassword;

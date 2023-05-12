@@ -43,11 +43,6 @@ module.exports = (sequelize) => {
             if (!/\d/.test(value)) {
               throw new Error("La contraseña debe contener al menos un número");
             }
-            if (/[^a-zA-Z0-9]/.test(value)) {
-              throw new Error(
-                "La contraseña no puede contener caracteres especiales"
-              );
-            }
           },
         },
       },
@@ -77,7 +72,7 @@ module.exports = (sequelize) => {
           },
         },
       },
-      adress:{
+      address:{
         type: DataTypes.JSON,
         allowNull: false,
         validate:{
