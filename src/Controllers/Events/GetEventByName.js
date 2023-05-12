@@ -9,8 +9,15 @@ const getEventByName = async (req, res) => {
       res.status(400).json({ error: 'Debe proporcionar el nombre del evento en la consulta.' });
       return;}
     
-      const event = await Event.findAll({ where: { name: {[Op.iLike]: `%${eventName.toLowerCase()}%`} } });
-      
+      const event = await Event.findAll({
+        where:{
+          [Op.or]:[
+             { name: {[Op.iLike]: `%${eventName.toLowerCase()}%`} },
+             {description: { [Op.iLike]: `%${eventName.toLowerCase()}%` }}
+          ]
+        }});
+        
+
     if (!event) {
       res.status(404).json({ error: 'No se encontró ningún evento con el nombre proporcionado.' });
       return;}
