@@ -1,29 +1,29 @@
-// const {Event, Ticket}=require('../../db.js')
+const {Ticket}=require('../../db.js')
 
-// const putEvents= async(req,res)=>{
-//   try {
-//     const eventId = req.params.id;
-//     const updatedData = req.body;
+const putTicket= async(req,res)=>{
+  try {
+    const ticketId = req.params.ticketId;
+    const updatedData = req.body;
 
 
-//     if (!eventId) {
-//       res.status(400).json({ error: 'Debe proporcionar el ID del evento en el parámetro.' });
-//       return;
-//     }
+    if (!ticketId) {
+      res.status(400).json({ error: 'Debe proporcionar el ID de los tickets en el parámetro.' });
+      return;
+    }
 
-//     const event = await Event.findByPk(eventId);
+    const ticket = await Ticket.findByPk(ticketId);
 
-//     if (!event) {
-//       res.status(404).json({ error: 'No se encontró ningún evento con el ID proporcionado.' });
-//       return;
-//     }
+    if (!ticket) {
+      res.status(404).json({ error: 'No se encontraron tickets con el ID proporcionado.' });
+      return;
+    }
 
-//     await event.update(updatedData);
+    await ticket.update(updatedData);
 
-//     res.status(200).json({ message: 'Evento actualizado correctamente.' });
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// }
+    res.status(200).json({ updatedData });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
 
-// module.exports=putEvents;
+module.exports=putTicket;
