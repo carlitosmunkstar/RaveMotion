@@ -43,7 +43,7 @@ const singUp = async (req, res) => {
     });
 
     // Enviar respuesta
-    res.status(201).json({ message: 'Usuario creado exitosamente.' });
+    res.status(201).json({ message: newUser });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Hubo un error al crear el usuario.' });

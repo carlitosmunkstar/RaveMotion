@@ -45,17 +45,18 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       date: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          isDate: true,
-          futureDate(value) {
-            let currentDate = moment().format('YYYY-MM-DD');
-            if (!moment(value, 'DD-MM-YYYY').isAfter(currentDate, 'YYYY-MM-DD')) {
-              throw new Error('La fecha debe ser futura');
-            }
-          },
+        type: DataTypes.DATE,
+        get() {
+          const rawValue = this.getDataValue('date');
+          if (rawValue) {
+            return moment(rawValue).format('DD-MM-YYYY');
+          }
+          return null;
         },
+        set(value) {
+          const formattedValue = moment(value, 'DD-MM-YYYY').format('YYYY-MM-DD');
+          this.setDataValue('date', formattedValue);
+        }
       },
       hour: {
         type: DataTypes.TIME,
