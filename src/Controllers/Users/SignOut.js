@@ -6,7 +6,7 @@ const signOut = (req, res) => {
     // Enviar respuesta
     res.status(200).json({ message: 'Sesión cerrada con éxito.' });
   } catch (error) {
-    res.status(500).json({ message: 'Hubo un error al cerrar la sesión.' });
+    res.status(500).json({error:error.message });
   }
 };
 

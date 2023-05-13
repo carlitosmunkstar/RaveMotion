@@ -20,7 +20,7 @@ const putEvents= async(req,res)=>{
 
     await event.update(updatedData);
 
-    res.status(200).json({ message: 'Evento actualizado correctamente.' });
+    res.status(200).json(event);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -32,9 +32,9 @@ const singIn = async (req, res) => {
     res.cookie('jwt', token, { httpOnly: true, sameSite: 'strict' });
 
     // Enviar respuesta
-    res.status(200).json({ message: 'Inicio de sesión exitoso.' });
+    res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ message: 'Hubo un error al iniciar sesión.' });
+    res.status(500).json({error:error.message});
   }
 };
 

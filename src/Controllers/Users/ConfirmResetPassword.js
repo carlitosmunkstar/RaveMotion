@@ -28,7 +28,7 @@ const confirmResetPassword = async (req, res) => {
     user.password = hashedPassword;
     await user.save();
 
-    res.json({ message: "Contraseña actualizada exitosamente." });
+    res.status(200).json({ message: "Contraseña actualizada exitosamente." });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Hubo un error al intentar restablecer la contraseña." });
