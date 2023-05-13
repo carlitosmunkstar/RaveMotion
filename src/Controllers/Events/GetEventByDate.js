@@ -4,18 +4,15 @@ const moment = require('moment');
 
 const getEventByDate = async (req, res) => {
   try {
-    const {startDate,endDate} = req.body;
-  
-    console.log(startDate)
-    console.log(endDate)
+    const {startDate,endDate} = req.query;
     if (!startDate || !endDate) {
       res.status(400).json({ error: 'Debe proporcionar las fechas en la consulta.' });
       return;}
     
       const eventByDate = await Event.findAll({where: {
         [Op.and]: [
-          { date: { [Op.gte]: moment(startDate, 'DD-MM-YYYY').toDate() } },
-          { date: { [Op.lte]: moment(endDate, 'DD-MM-YYYY').toDate() } }
+          { date: { [Op.gte]: moment(startDate, 'YYYY-MM-DD').toDate() } },
+          { date: { [Op.lte]: moment(endDate, 'YYYY-MM-DD').toDate() } }
         ]
       }});
       

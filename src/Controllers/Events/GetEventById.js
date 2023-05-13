@@ -3,11 +3,14 @@ const {Event, Ticket}=require('../../db');
 const getEventById=async(req,res)=>{
     const {id}=req.params;
     try {
+        console.log(id);
         const event=await Event.findByPk(id,
             {include:[
                 {model:Ticket,
+                required: false,
                 where: {eventId:id}},
             ]});
+            console.log(event);
         if(event){
             res.status(200).json(event)
         }else{
