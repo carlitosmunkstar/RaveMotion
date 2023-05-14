@@ -6,8 +6,8 @@ const ConfirmResetPassword = require("../Controllers/Users/ConfirmResetPassword"
 const signOut = require("../Controllers/Users/SignOut");
 const router = Router();
 
-router.get("/logout", signOut);
-router.get("/login", singIn);
+router.get("/signout", signOut);
+router.post("/signin", singIn);
 router.get("/resetpassword", ResetPassword);
 router.get("/resetpassword/:resetPasswordToken", ConfirmResetPassword);
 router.post("/signup", singUp);
