@@ -1,36 +1,24 @@
-const bcrypt = require("bcryptjs");
 const { User } = require("../../db");
 const { Op } = require("sequelize");
 
 // Verifiacion del email en la bdd
 const singUp1 = async (req, res) => {
-    const { mail, password } = req.body;
-
+    const { mail } = req.body;
     try {
         const existingUser = await User.findOne({
-            where: { mail: { [Op.iLike]: mail } },
+            where: { mail: mail },
         });
         if (existingUser) {
             return res.status(400).json({
                 error: "El correo electrónico ya se encuentra registrado.",
             });
         }
-        // Encriptar la contraseña
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Crear el nuevo usuario
-        const newUser = await User.create({
-            mail,
-            password: hashedPassword,
-        });
 
         // Enviar respuesta
-        res.status(201).json({ message: "Mail registrado exitosamente." });
+        res.status(201).json({ message: "Mail disponible." });
     } catch (error) {
         console.error(error);
-        res.status(500).json({
-            error: "Hubo un error al registrar el mail.",
-        });
+        res.status(500).json({ error: "Hubo un error al verificar el mail." });
     }
 };
 
