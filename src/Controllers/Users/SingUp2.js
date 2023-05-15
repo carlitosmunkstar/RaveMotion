@@ -4,25 +4,14 @@ const { Op } = require('sequelize');
 // Método de registro
 const singUp2 = async (req, res) => {
   const {
-    mail,
-    firstName,
-    lastName,
     documentType,
     document
   } = req.body;
-
-  try {
-    const existingUser = await User.findOne({ where: { mail: { [Op.iLike]: mail } } });
-    if (!existingUser) {
-      return res.status(404).json({ message: 'Usuario no encontrado.' });
+try{
+    const existingDocument = await User.findOne({ where: { documentType, document } });
+    if (existingDocument) {
+      return res.status(400).json({ error: 'El documento ya está registrado.' });
     }
-
-    await User.update({
-      firstName,
-      lastName,
-      documentType,
-      document
-    }, { where: { mail: { [Op.iLike]: mail } } });
 
     res.status(201).json({ message: 'DNI y Nombre registrado exitosamente.' });
   } catch (error) {
@@ -31,5 +20,5 @@ const singUp2 = async (req, res) => {
   }
 }
 
+module.exports = singUp2;
 
-module.exports = singUp2
