@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const { User } = require("../../db");
 const { Op } = require("sequelize");
 
-// Método de registro
+// Verifiacion del email en la bdd
 const singUp1 = async (req, res) => {
     const { mail, password } = req.body;
 

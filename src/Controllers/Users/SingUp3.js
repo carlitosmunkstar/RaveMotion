@@ -1,10 +1,15 @@
+const bcrypt = require('bcryptjs');
 const {User} = require('../../db'); 
-const { Op } = require('sequelize');
 
 // Método de registro
 const singUp3 = async (req, res) => {
   const {
+    firstName,
+    lastName,
     mail,
+    password,
+    documentType,
+    document,
     birthDay,
     address,
     accessType,
@@ -12,24 +17,31 @@ const singUp3 = async (req, res) => {
   } = req.body;
 
   try {
-    const existingUser = await User.findOne({ where: { mail: { [Op.iLike]: mail } } });
-    if (!existingUser) {
-      return res.status(404).json({ message: 'Usuario no encontrado.' });
-    }
+ 
+    // Encriptar la contraseña
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    await User.update({
+    // Crear el nuevo usuario
+    const newUser = await User.create({
+      firstName,
+      lastName,
+      mail,
+      password: hashedPassword,
+      documentType,
+      document,
       birthDay,
       address,
       accessType,
       status
-    }, { where: { mail: { [Op.iLike]: mail } } });
+    });
 
+    // Enviar respuesta
     res.status(201).json({ message: 'Usuario creado exitosamente.' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Hubo un error al crear el usuario.' });
+    res.status(500).json({ error: 'Hubo un error al crear el usuario.' });
   }
-}
+}  
 
 
 module.exports = singUp3
