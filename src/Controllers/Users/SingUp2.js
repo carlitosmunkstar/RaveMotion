@@ -1,7 +1,6 @@
 const {User} = require('../../db'); 
-const { Op } = require('sequelize');
 
-// Método de registro
+// Verifiacion del documento en la bdd
 const singUp2 = async (req, res) => {
   const {
     documentType,
