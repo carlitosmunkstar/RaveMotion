@@ -38,7 +38,11 @@ const singIn = async (req, res) => {
         res.cookie("jwt", token, { httpOnly: true, sameSite: "strict" });
 
         // Enviar respuesta
-        res.status(200).json(user);
+        res.status(200).json({
+            id: user.id,
+            firstName: user.firstName,
+            accessType: user.accessType,
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
