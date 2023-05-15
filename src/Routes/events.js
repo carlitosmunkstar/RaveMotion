@@ -6,11 +6,14 @@ const getEventById = require("../Controllers/Events/GetEventById");
 const deleteEvents = require("../Controllers/Events/DeleteEvents");
 const putEvents = require("../Controllers/Events/PutEvents");
 
+const getEventByFilter = require("../Controllers/Events/getEventsFilters");
+
 const router = Router();
 
 
 router.get("/", getEvents);
 router.get("/name", getEventByName);
+router.get("/filter", getEventByFilter); //FUTUROS FILTROS COMBINADOS
 router.get("/:id", getEventById);
 router.post("/eventcreate", createEvents);
 router.put("/:id", putEvents);

@@ -252,6 +252,38 @@ recived:
 ]
 array con todas las tandas de tickets del evento
 ````
+### Update Tickets
+PUT
+http://localhost:3001/tickets/updatetickets/:ticketId
+
+expected:
+id de la tanda de tickets por params.
+
+JSON con la info por body:
+{
+     	"name":"LaFiesta t2wovaca",
+		"eventId":"fa6e689c-bab4-49dd-89f6-a496afd56ee2",
+		"userId":"4a59e511-f817-4ea5-8544-c393dc32de4a",
+        "description": "Ticket vip para la fiestachows111" ,
+        "maxQuantity":2000,
+        "price": 15000,
+        "accessType":"vip",
+        "sells": 200
+}
+
+recived:
+{
+	"updatedData": {
+		"name": "LaFiesta t2wovaca",
+		"eventId": "fa6e689c-bab4-49dd-89f6-a496afd56ee2",
+		"userId": "4a59e511-f817-4ea5-8544-c393dc32de4a",
+		"description": "Ticket vip para la fiestachows111",
+		"maxQuantity": 2000,
+		"price": 15000,
+		"accessType": "vip",
+		"sells": 200
+	}
+}
 
 ## Rutas del modelo User
 
