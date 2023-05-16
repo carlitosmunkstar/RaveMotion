@@ -12,6 +12,7 @@ let filter = {};
 try{
  if (producer && startDate && endDate) {
      filter = {
+      status:true,
       [Op.and]: [
             { date: { [Op.gte]: moment(startDate, 'YYYY-MM-DD').toDate() } },
             { date: { [Op.lte]: moment(endDate, 'YYYY-MM-DD').toDate() } }
@@ -20,10 +21,12 @@ try{
   };
 } else if (producer) {
   filter = {
+    status:true,
     producer: producer
   };
 } else if (startDate && endDate) {
   filter = {
+    status:true,
     [Op.and]: [
         { date: { [Op.gte]: moment(startDate, 'YYYY-MM-DD').toDate() } },
         { date: { [Op.lte]: moment(endDate, 'YYYY-MM-DD').toDate() } }
