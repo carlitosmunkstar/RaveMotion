@@ -3,7 +3,9 @@ const { Event, Ticket } = require("../../db");
 const getEventById = async (req, res) => {
     const { id } = req.params;
     try {
+       
         const event = await Event.findByPk(id, {
+            where: {status:true},
             include: [
                 { model: Ticket, required: false, where: { eventId: id } },
             ],

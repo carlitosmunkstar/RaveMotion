@@ -1,10 +1,8 @@
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const {User} = require('../../db'); 
-const { Op } = require('sequelize');
 
 // Método de registro
-const singUp = async (req, res) => {
+const singUp3 = async (req, res) => {
   const {
     firstName,
     lastName,
@@ -46,5 +44,5 @@ const singUp = async (req, res) => {
 }  
 
 
-module.exports = singUp
+module.exports = singUp3
 
