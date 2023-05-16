@@ -10,30 +10,45 @@ const endDate = req.query.endDate;
 
 let filter = {};
 try{
- if (producer && startDate && endDate) {
-     filter = {
+  if (producer && startDate && endDate) {
+      filter = {
+        [Op.and]: [
+              { date: { [Op.gte]: moment(startDate, 'YYYY-MM-DD').toDate() } },
+              { date: { [Op.lte]: moment(endDate, 'YYYY-MM-DD').add(1, 'days').toDate() } }
+            ],
+        producer: producer
+    };
+  }
+  else if (!producer && startDate && !endDate){
+    filter = {
       [Op.and]: [
-            { date: { [Op.gte]: moment(startDate, 'YYYY-MM-DD').toDate() } },
-            { date: { [Op.lte]: moment(endDate, 'YYYY-MM-DD').add(1, 'days').toDate() } }
-          ],
-      producer: producer
-  };
-} else if (producer) {
-  filter = {
-    producer: producer
-  };
-} else if (startDate && endDate) {
-  filter = {
-    [Op.and]: [
-        { date: { [Op.gte]: moment(startDate, 'YYYY-MM-DD').toDate() } },
-        { date: { [Op.lte]: moment(endDate, 'YYYY-MM-DD').add(1, 'days').toDate() } }
+        { date: { [Op.gte]: moment(startDate, 'YYYY-MM-DD').toDate() } }
       ]
-  };
-}
+    }}
+  else if (producer && startDate && !endDate) {
+    filter = {
+      [Op.and]: [
+        { date: { [Op.gte]: moment(startDate, 'YYYY-MM-DD').toDate() } }
+      ],
+      producer: producer
+    }}
+    
+    else if (producer) {
+    filter = {
+      producer: producer
+    };
+  } else if (startDate && endDate) {
+    filter = {
+      [Op.and]: [
+          { date: { [Op.gte]: moment(startDate, 'YYYY-MM-DD').toDate() } },
+          { date: { [Op.lte]: moment(endDate, 'YYYY-MM-DD').add(1, 'days').toDate() } }
+        ]
+    };
+  }
 
-const FilterEvents = await Event.findAll({
-  where: filter
-})
+  const FilterEvents = await Event.findAll({
+    where: filter
+  })
 res.status(200).json(FilterEvents);
 }
 catch(error){
