@@ -14,7 +14,7 @@ try{
      filter = {
       [Op.and]: [
             { date: { [Op.gte]: moment(startDate, 'YYYY-MM-DD').toDate() } },
-            { date: { [Op.lte]: moment(endDate, 'YYYY-MM-DD').toDate() } }
+            { date: { [Op.lte]: moment(endDate, 'YYYY-MM-DD').add(1, 'days').toDate() } }
           ],
       producer: producer
   };
@@ -26,7 +26,7 @@ try{
   filter = {
     [Op.and]: [
         { date: { [Op.gte]: moment(startDate, 'YYYY-MM-DD').toDate() } },
-        { date: { [Op.lte]: moment(endDate, 'YYYY-MM-DD').toDate() } }
+        { date: { [Op.lte]: moment(endDate, 'YYYY-MM-DD').add(1, 'days').toDate() } }
       ]
   };
 }
