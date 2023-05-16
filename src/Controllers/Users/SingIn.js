@@ -29,26 +29,28 @@ const singIn = async (req, res) => {
 
         // Crear token
         const token = jwt.sign(
-            { password: user.password, email: user.mail },
+            {
+                id: user.id,
+                email: user.mail,
+                accessType: user.accessType,
+                firstName: user.firstName,
+            },
             process.env.JWT_SECRET,
             { expiresIn: "1h" }
         );
 
-        // Establecer la cookie
-        res.cookie("jwt", token, {
-            httpOnly: true,
-            sameSite: "lax",
-            secure: false,
-        });
-
+        // Establecer el JWT en el header
+        res.set("jwt", "token");
         console.log(res);
 
         // Enviar respuesta
         res.status(200).json({
-            id: user.id,
-            firstName: user.firstName,
-            accessType: user.accessType,
-            token: token,
+            user: {
+                id: user.id,
+                email: user.mail,
+                accessType: user.accessType,
+                firstName: user.firstName,
+            },
         });
     } catch (error) {
         res.status(500).json({ error: error.message });
