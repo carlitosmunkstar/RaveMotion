@@ -3,7 +3,8 @@ const jwt = require("jsonwebtoken");
 const { User } = require("../../db");
 const { Op } = require("sequelize");
 
-// Método de inicio de sesión7
+// Comprueba mail y password del user.
+// Emite los datos necesarios del user tanto en un objeto user como en un JSW
 
 const singIn = async (req, res) => {
     const { mail, password } = req.body;
@@ -39,9 +40,9 @@ const singIn = async (req, res) => {
             { expiresIn: "30d" }
         );
 
-        // Establecer el JWT en el header
-        //res.set("jwt", token);
-        
+
+        // Establecer el JWT en el header PENDIENTE
+
 
         // Enviar respuesta
         res.status(200).json({
