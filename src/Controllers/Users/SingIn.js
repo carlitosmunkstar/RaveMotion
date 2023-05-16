@@ -29,13 +29,13 @@ const singIn = async (req, res) => {
 
         // Crear token
         const token = jwt.sign(
-            { userId: user.id, email: user.mail },
+            { password: user.password, email: user.mail },
             process.env.JWT_SECRET,
             { expiresIn: "1h" }
         );
 
         // Establecer la cookie
-        res.cookie("jwt", token, { httpOnly: true, sameSite: "strict" });
+        res.cookie("jwt", token, { httpOnly: false, sameSite: "strict" });
 
         // Enviar respuesta
         res.status(200).json({
