@@ -40,7 +40,9 @@ const singIn = async (req, res) => {
             { expiresIn: "30d" }
         );
 
+
         // Establecer el JWT en el header PENDIENTE
+
 
         // Enviar respuesta
         res.status(200).json({
@@ -50,7 +52,7 @@ const singIn = async (req, res) => {
                 accessType: user.accessType,
                 firstName: user.firstName,
             },
-            jwt: token,
+            jwt:token,
         });
     } catch (error) {
         res.status(500).json({ error: error.message });
