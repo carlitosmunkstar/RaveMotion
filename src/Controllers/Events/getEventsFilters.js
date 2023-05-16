@@ -8,8 +8,12 @@ const producer = req.query.producer;
 const startDate = req.query.startDate;
 const endDate = req.query.endDate;
 
+const validationDate = moment(startDate, 'YYYY-MM-DD')
+const StartDateCurrent = validationDate.isSameOrAfter(validationDate, 'day');
+
 let filter = {};
 try{
+  if(StartDateCurrent){
   if (producer && startDate && endDate) {
       filter = {
         [Op.and]: [
@@ -45,12 +49,15 @@ try{
         ]
     };
   }
+}else{res.status(500).json({error:"La fecha ingresada debe ser actual o futura"});}
 
   const FilterEvents = await Event.findAll({
     where: filter
   })
+
 res.status(200).json(FilterEvents);
 }
+
 catch(error){
     res.status(500).json(error);
 }}
