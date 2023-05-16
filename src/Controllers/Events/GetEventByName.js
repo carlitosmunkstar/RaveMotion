@@ -1,4 +1,5 @@
 const { Event, Ticket } = require('../../db.js');
+const {Op}=require('sequelize');
 
 const getEventByName = async (req, res) => {
   try {
@@ -8,8 +9,21 @@ const getEventByName = async (req, res) => {
       res.status(400).json({ error: 'Debe proporcionar el nombre del evento en la consulta.' });
       return;}
     
-      const event = await Event.findOne({ where: { name: eventName } });
       
+        const event = await Event.findAll({
+          where: {
+            [Op.and]: [
+              {
+                [Op.or]:[
+                  { name: {[Op.iLike]: `%${eventName.toLowerCase()}%`} },
+                  {description: { [Op.iLike]: `%${eventName.toLowerCase()}%` }}
+               ],
+              },
+              { status: true },
+            ],
+          },
+        });
+
     if (!event) {
       res.status(404).json({ error: 'No se encontró ningún evento con el nombre proporcionado.' });
       return;}
@@ -20,3 +34,6 @@ const getEventByName = async (req, res) => {
 };
 
 module.exports = getEventByName;
+
+
+//* que busque en la descropcion
