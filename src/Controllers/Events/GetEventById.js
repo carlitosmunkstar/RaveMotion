@@ -10,11 +10,12 @@ const getEventById = async (req, res) => {
                 { model: Ticket, required: false, where: { eventId: id } },
             ],
         });
-        if (event) {
+        if (event===true) {
             res.status(200).json(event);
         } else {
-            res.status(400).json("Evento no encontrado");
+            res.status(400).json("Evento terminado");
         }
+        return res.status(204).json('El evento ya termino')
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
