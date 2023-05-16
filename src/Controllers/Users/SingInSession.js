@@ -22,7 +22,6 @@ const { User } = require("../../db");
 
 const SingInSession = async (req, res) => {
     const { token } = req.body;
-    console.log(req.body);
 
     try {
         // Verificar el token
