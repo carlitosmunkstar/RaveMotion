@@ -29,19 +29,26 @@ const singIn = async (req, res) => {
 
         // Crear token
         const token = jwt.sign(
-            { userId: user.id, email: user.mail },
+            { password: user.password, email: user.mail },
             process.env.JWT_SECRET,
             { expiresIn: "1h" }
         );
 
         // Establecer la cookie
-        res.cookie("jwt", token, { httpOnly: true, sameSite: "strict" });
+        res.cookie("jwt", token, {
+            httpOnly: true,
+            sameSite: "lax",
+            secure: false,
+        });
+
+        console.log(res);
 
         // Enviar respuesta
         res.status(200).json({
             id: user.id,
             firstName: user.firstName,
             accessType: user.accessType,
+            token: token,
         });
     } catch (error) {
         res.status(500).json({ error: error.message });
