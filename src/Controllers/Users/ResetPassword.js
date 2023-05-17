@@ -23,13 +23,10 @@ const resetPassword = async (req, res) => {
 
         // Envía un correo electrónico al usuario con el token
         const subject = "Restablecimiento de contraseña";
-        const message = `Haz clic en el siguiente enlace para restablecer tu contraseña: http://localhost:3001/resetpassword/${resetPasswordToken}`;
+        const message = `Haz clic en el siguiente enlace para restablecer tu contraseña: http://localhost:5173/changepassword/2`;
         await sendEmail(user.mail, subject, message);
 
-        res.status(200).json({
-            message:
-                "Correo electrónico de restablecimiento de contraseña enviado.",
-        });
+        res.status(200).json({resetPasswordToken});
     } catch (error) {
         console.error(error);
         res.status(500).json({
