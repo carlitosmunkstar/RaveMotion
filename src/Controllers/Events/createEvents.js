@@ -1,4 +1,14 @@
 const { Event } = require("../../db");
+const cloudinary = require("cloudinary").v2;
+const { CLOUD_NAME, CLOUD_API_KEY, CLOUD_API_SECRET } = process.env;
+
+cloudinary.config({
+    cloud_name: CLOUD_NAME,
+    api_key: CLOUD_API_KEY,
+    api_secret: CLOUD_API_SECRET,
+});
+
+
 
 const createEvents = async (req, res) => {
     try {
@@ -12,6 +22,7 @@ const createEvents = async (req, res) => {
             producer,
             userId,
         } = req.body;
+     
         if (
             !name ||
             !image ||
@@ -26,10 +37,12 @@ const createEvents = async (req, res) => {
                 "Su solicitud no se puede procesar debido a que faltan datos requeridos. Por favor, asegúrese de completar toda la información necesaria antes de volver a enviar la solicitud."
             );
         } else {
+            const result = await cloudinary.uploader.upload(image);
+            let newImage = result.secure_url;
             await Event.findOrCreate({
                 where: { name },
                 defaults: {
-                    image,
+                    image:newImage,
                     description,
                     date,
                     hour,
