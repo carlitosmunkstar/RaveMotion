@@ -1,15 +1,21 @@
 const { Router } = require("express");
-const singUp = require("../Controllers/Users/SingUp");
+const singUp1 = require("../Controllers/Users/SingUp1");
+const singUp2 = require("../Controllers/Users/SingUp2");
+const singUp3 = require("../Controllers/Users/SingUp3");
 const singIn = require("../Controllers/Users/SingIn");
-const  ResetPassword  = require("../Controllers/Users/ResetPassword");
-const ConfirmResetPassword= require("../Controllers/Users/ConfirmResetPassword")
-const signOut= require("../Controllers/Users/SignOut")
+const SingInSession = require("../Controllers/Users/SingInSession");
+const ResetPassword = require("../Controllers/Users/ResetPassword");
+const ConfirmResetPassword = require("../Controllers/Users/ConfirmResetPassword");
+const signOut = require("../Controllers/Users/SignOut");
 const router = Router();
 
-router.get("/logout",signOut);
-router.get("/login", singIn);
-router.get("/resetpassword",ResetPassword)
-router.get("/resetpassword/:resetPasswordToken",ConfirmResetPassword)
-router.post("/singUp", singUp);
+router.get("/signout", signOut);
+router.post("/signin", singIn);
+router.post("/signinsession", SingInSession);
+router.get("/resetpassword", ResetPassword);
+router.get("/resetpassword/:resetPasswordToken", ConfirmResetPassword);
+router.post("/signup1", singUp1);
+router.post("/signup2", singUp2);
+router.post("/signup3", singUp3);
 
 module.exports = router;

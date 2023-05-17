@@ -20,13 +20,13 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [1, 100],
+        len: [1, 50],
       },
     },
     description: {
       type: DataTypes.STRING,
       validate: {
-        len: [1, 100],
+        len: [1, 50],
       },
     },
     accessType: {
