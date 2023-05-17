@@ -12,7 +12,7 @@ const router = Router();
 router.get("/signout", signOut);
 router.post("/signin", singIn);
 router.post("/signinsession", SingInSession);
-router.get("/resetpassword", ResetPassword);
+router.post("/resetpassword", ResetPassword);
 router.get("/resetpassword/:resetPasswordToken", ConfirmResetPassword);
 router.post("/signup1", singUp1);
 router.post("/signup2", singUp2);

@@ -30,30 +30,16 @@ const singIn = async (req, res) => {
 
         // Crear token
         const token = jwt.sign(
-<<<<<<< HEAD
-            { password: user.password, email: user.mail },
-=======
             {
                 id: user.id,
                 email: user.mail,
                 accessType: user.accessType,
                 firstName: user.firstName,
             },
->>>>>>> 98e4c796e2f4bab4e50e856c7789bb9b9f3f6f29
             process.env.JWT_SECRET,
             { expiresIn: "30d" }
         );
-
-<<<<<<< HEAD
-        // Establecer la cookie
-        res.cookie("jwt", token, { httpOnly: false, sameSite: "strict" });
-=======
-
-        // Establecer el JWT en el header PENDIENTE
-
->>>>>>> 98e4c796e2f4bab4e50e856c7789bb9b9f3f6f29
-
-        // Enviar respuesta
+      // Enviar respuesta
         res.status(200).json({
             user: {
                 id: user.id,
