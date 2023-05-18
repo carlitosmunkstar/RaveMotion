@@ -13,10 +13,10 @@ const resetPassword = async (req, res) => {
                 error: "No existe un usuario con ese correo electrónico.",
             });
         }
-
+        const timestamp = Date.now();
         // Genera un token de restablecimiento de contraseña
         const resetPasswordToken = jwt.sign(
-            { userId: user.id, resetPassword: true },
+            { userId: user.id,timestamp, resetPassword: true },
             process.env.JWT_SECRET,
             { expiresIn: "1h" } // 1 hora de duración
         );
