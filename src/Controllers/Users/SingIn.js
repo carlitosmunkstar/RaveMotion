@@ -39,12 +39,7 @@ const singIn = async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: "30d" }
         );
-
-
-        // Establecer el JWT en el header PENDIENTE
-
-
-        // Enviar respuesta
+      // Enviar respuesta
         res.status(200).json({
             user: {
                 id: user.id,

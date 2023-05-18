@@ -13,23 +13,20 @@ const resetPassword = async (req, res) => {
                 error: "No existe un usuario con ese correo electrónico.",
             });
         }
-
+        const timestamp = Date.now();
         // Genera un token de restablecimiento de contraseña
         const resetPasswordToken = jwt.sign(
-            { userId: user.id, resetPassword: true },
+            { userId: user.id,timestamp, resetPassword: true },
             process.env.JWT_SECRET,
             { expiresIn: "1h" } // 1 hora de duración
         );
 
         // Envía un correo electrónico al usuario con el token
         const subject = "Restablecimiento de contraseña";
-        const message = `Haz clic en el siguiente enlace para restablecer tu contraseña: http://localhost:3001/resetpassword/${resetPasswordToken}`;
+        const message = `Haz clic en el siguiente enlace para restablecer tu contraseña: http://localhost:5173/changepassword/2`;
         await sendEmail(user.mail, subject, message);
 
-        res.status(200).json({
-            message:
-                "Correo electrónico de restablecimiento de contraseña enviado.",
-        });
+        res.status(200).json({resetPasswordToken});
     } catch (error) {
         console.error(error);
         res.status(500).json({

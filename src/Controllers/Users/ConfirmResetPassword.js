@@ -4,12 +4,11 @@ const jwt = require("jsonwebtoken");
 
 const confirmResetPassword = async (req, res) => {
     try {
-        const { resetPasswordToken } = req.params;
-        const { newPassword } = req.body;
+        const { newPassword,resetPasswordToken1 } = req.body;
 
         // Desencripta el token y extrae el ID del usuario y la marca de tiempo
         const { userId, timestamp } = jwt.verify(
-            resetPasswordToken,
+            resetPasswordToken1,
             process.env.JWT_SECRET
         );
 
