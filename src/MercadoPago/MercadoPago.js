@@ -16,7 +16,7 @@ const createPayment=async (req,res)=>{
         ],
         back_urls:{
             success: 'http://localhost:5173/',
-			failure: "",
+			failure: "http://localhost:5173/",
         },
         auto_return: 'approved',
         //notification_url:'http://localhost:3001/payments/notifications',
