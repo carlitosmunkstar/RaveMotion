@@ -64,7 +64,7 @@ const {
           archivo_temporal.removeCallback();
           // Agregar el ticket a la lista de nuevos tickets con la URL del código QR
 
-          //* aumenta en 1 sells de la tanda
+          // * aumenta en 1 sells de la tanda
           const tanda=await Ticket.findByPk(ticket.ticketId);
           tanda.sells++
           await tanda.save();
