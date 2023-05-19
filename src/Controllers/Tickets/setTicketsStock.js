@@ -15,6 +15,17 @@ const setTicketsStock= async(req,res)=>{
         res.status(404).json({ error: 'No se encontraron tickets con el ID proporcionado.' });
         return;
       }
+
+    const maxQuantity = TandaTicket.maxQuantity;
+    const TotalTicketsreservation = TandaTicket.sells + TandaTicket.reservation + reservation;
+    const reservasStock = maxQuantity - TandaTicket.sells - TandaTicket.reservation;
+
+    //control se Stock
+    if(TotalTicketsreservation > maxQuantity){
+      res.status(400).json({error:`No hay Stock para generar esa reserva. La cantidad de tickets disponible para ${TandaTicket.name} es de :${reservasStock}`})
+      return
+    }
+    
     TandaTicket.reservation += reservation;
     await TandaTicket.save();
 
