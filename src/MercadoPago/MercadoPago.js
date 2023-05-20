@@ -5,7 +5,7 @@ mercadopago.configure({access_token:MP_TOKEN})
 
 const createPayment=async (req,res)=>{
 
-    const {tickets, name, price}=req.body;
+    const {name, price}=req.body;
     let preference={
         items:[
             {
@@ -24,7 +24,7 @@ const createPayment=async (req,res)=>{
 
     try {
         const paymentPreference = await mercadopago.preferences.create(preference);
-        res.status(200).json({ MPlink: paymentPreference.body.init_point });
+        res.status(200).json({ preference_id: paymentPreference.body.id });
       } catch (error) {
         res.status(500).json({ error: error.message });
       }
