@@ -64,7 +64,7 @@ const {
           archivo_temporal.removeCallback();
           // Agregar el ticket a la lista de nuevos tickets con la URL del código QR
 
-          //* aumenta en 1 sells de la tanda
+          // * aumenta en 1 sells de la tanda
           const tanda=await Ticket.findByPk(ticket.ticketId);
           tanda.sells++
           await tanda.save();
@@ -75,27 +75,28 @@ const {
             qrImage: resultado.secure_url,
           };
         })
-      );
-      // Agregar los nuevos tickets a la base de datos
-      newTickets = resultados;
-      
-      const createdTickets = await TicketsSold.bulkCreate(newTickets);
-      if (createdTickets) {
-        newTickets.map(async ticket =>  {
-          const newTicket = await TicketsSold.findByPk(ticket.id, {
-            include: [{
-              model: Ticket, // Reemplaza "Tanda" con el nombre correcto del modelo de la tanda de tickets
-              where: { id: ticket.ticketId },
-              attributes: ['name', 'accessType'],
-            },
-            {
-              model: Event,
-              attributes: ['name'],
-            }]
-          })
-        await sendEmailWithQrCode(newTicket);
-        })
+        );
+        // Agregar los nuevos tickets a la base de datos
+        newTickets = resultados;
         
+        const createdTickets = await TicketsSold.bulkCreate(newTickets);
+        if (createdTickets) {
+          newTickets.map(async ticket =>  {
+            const newTicket = await TicketsSold.findByPk(ticket.id, {
+              include: [{
+                model: Ticket, // Reemplaza "Tanda" con el nombre correcto del modelo de la tanda de tickets
+                where: { id: ticket.ticketId },
+                attributes: ['name', 'accessType'],
+              },
+              {
+                model: Event,
+                attributes: ['name'],
+              }]
+            })
+            await sendEmailWithQrCode(newTicket);
+          })
+          console.log("LLEGUEEEEE");
+          
         res.status(200).json(createdTickets);
       } else {
         res.status(400).json("Error al comprar los tickets");
