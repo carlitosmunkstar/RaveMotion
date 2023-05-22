@@ -2,7 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const routes = require("./Routes/index");
+const routes = require("./routes/index.js");
 const cors = require("cors");
 
 const CLIENT_ID = process.env.CLIENT_URL;
