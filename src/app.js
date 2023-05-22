@@ -2,7 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const routes = require("./routes/index.js");
+const routes = require("./Routes/index");
 const cors = require("cors");
 
 const CLIENT_ID = process.env.CLIENT_URL;
@@ -42,3 +42,4 @@ server.use((err, req, res, next) => {
 });
 
 module.exports = server;
+
