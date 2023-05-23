@@ -1,15 +1,16 @@
-const { Users, Tickets } = require("../db");
+const {Users, Tickets} = require('../db');
 
 
 const getUserTick = async (imail) =>{
-    const findUser = await Users.findOne({
-        where: {mail: imail},
-        includes: {
-            model: Tickets,
-        }
-    })
-} 
+  /* eslint-disable-next-line*/
+  const findUser = await Users.findOne({
+    where: {mail: imail},
+    includes: {
+      model: Tickets,
+    },
+  });
+};
 
 module.exports = {
-    getUserTick
-}
+  getUserTick,
+};
