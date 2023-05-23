@@ -1,20 +1,21 @@
-const {Event, Ticket}=require('../../db.js')
+/* eslint-disable max-len */
+const {Event}=require('../../db.js');
 
-const putEvents= async(req,res)=>{
+const putEvents= async (req, res)=>{
   try {
     const eventId = req.params.id;
     const updatedData = req.body;
 
 
     if (!eventId) {
-      res.status(400).json({ error: 'Debe proporcionar el ID del evento en el parámetro.' });
+      res.status(400).json({error: 'Debe proporcionar el ID del evento en el parámetro.'});
       return;
     }
 
     const event = await Event.findByPk(eventId);
 
     if (!event) {
-      res.status(404).json({ error: 'No se encontró ningún evento con el ID proporcionado.' });
+      res.status(404).json({error: 'No se encontró ningún evento con el ID proporcionado.'});
       return;
     }
 
@@ -22,8 +23,8 @@ const putEvents= async(req,res)=>{
 
     res.status(200).json(event);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({error: error.message});
   }
-}
+};
 
 module.exports=putEvents;

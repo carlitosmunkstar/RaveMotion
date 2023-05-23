@@ -1,14 +1,15 @@
-
+const jwt = require("jsonwebtoken");
+const { User } = require("../../db");
+const { Op } = require("sequelize");
 
 const Logingoogle=  async (req, res) => {
   const { name, lastname, mail } = req.body;
-
   try {
     // Buscar usuario
     const user = await User.findOne({
         where: { mail: { [Op.iLike]: mail } },
     });
-    if (!user) {
+    if (!user) { 
         return res
             .status(400)
             .json({ error: "Las credenciales no son válidas." });
@@ -17,7 +18,7 @@ const Logingoogle=  async (req, res) => {
 const token = jwt.sign(
   {
       id: user.id,
-      email: user.mail,
+      mail: user.mail,
       accessType: user.accessType,
       firstName: user.firstName,
   },
@@ -28,7 +29,7 @@ const token = jwt.sign(
 res.status(200).json({
   user: {
       id: user.id,
-      email: user.mail,
+      mail: user.mail,
       accessType: user.accessType,
       firstName: user.firstName,
   },
