@@ -2,16 +2,14 @@ const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const routes = require('./routes/index.js');
+const routes = require('./Routes/index.js');
 const cors = require('cors');
-
-const CLIENT_ID = process.env.CLIENT_URL;
 
 const server = express();
 server.use(cookieParser());
 server.use(
     cors({
-      origin: CLIENT_ID, // reemplaza con la URL de tu cliente
+      origin: process.env.CLIENT_URL, // reemplaza con la URL de tu cliente
       credentials: true,
     }),
 );
