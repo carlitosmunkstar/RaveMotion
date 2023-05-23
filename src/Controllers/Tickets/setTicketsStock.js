@@ -22,10 +22,10 @@ const setTicketsStock= async(req,res)=>{
 
     //control se Stock
     if(TotalTicketsreservation > maxQuantity){
-      res.status(400).json({error:`No hay Stock para generar esa reserva. La cantidad de tickets disponible para ${TandaTicket.name} es de :${reservasStock}`})
+      res.status(400).json({error:`No hay Stock para generar esa reserva. La cantidad de disponible para ${TandaTicket.name} es de ${reservasStock} tickets.`})
       return
     }
-    
+
     TandaTicket.reservation += reservation;
     await TandaTicket.save();
 
