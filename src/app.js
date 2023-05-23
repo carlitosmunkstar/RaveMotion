@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const routes = require('./Routes/index.js');
-const cors = require('cors');
+// const cors = require('cors');
 
 const server = express();
 server.use(cookieParser());
