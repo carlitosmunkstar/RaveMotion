@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const {User} = require('../../db'); 
+const {User} = require('../../db');
 
 // Método de registro
 const singUp3 = async (req, res) => {
@@ -13,11 +13,10 @@ const singUp3 = async (req, res) => {
     birthDay,
     address,
     accessType,
-    status
+    status,
   } = req.body;
 
   try {
- 
     // Encriptar la contraseña
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -32,17 +31,17 @@ const singUp3 = async (req, res) => {
       birthDay,
       address,
       accessType,
-      status
+      status,
     });
 
     // Enviar respuesta
     res.status(201).json(newUser);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Hubo un error al crear el usuario.' });
+    res.status(500).json({error: 'Hubo un error al crear el usuario.'});
   }
-}  
+};
 
 
-module.exports = singUp3
+module.exports = singUp3;
 

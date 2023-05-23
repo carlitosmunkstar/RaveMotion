@@ -1,7 +1,7 @@
-const { DataTypes } = require("sequelize");
+const {DataTypes} = require('sequelize');
 
 module.exports = (sequelize) => {
-  sequelize.define("Ticket", {
+  sequelize.define('Ticket', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -12,8 +12,8 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       references: {
-        model: "Events",
-        key: "id",
+        model: 'Events',
+        key: 'id',
       },
     },
     name: {
@@ -50,33 +50,35 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0,
-      validate:{
-        maxQuantity(value){
-          if(value>this.getDataValue('maxQuantity')){
-            throw new Error('La cantidad vendida no puede superar el máximo de tickets')
+      validate: {
+        maxQuantity(value) {
+          if (value>this.getDataValue('maxQuantity')) {
+            /* eslint-disable-next-line*/
+            throw new Error('La cantidad vendida no puede superar el máximo de tickets');
           }
-        }
-      }
+        },
+      },
     },
     reservation: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0,
-      validate:{
+      validate: {
         maxQuantity(value) {
           const sells = this.getDataValue('sells');
           const maxQuantity = this.getDataValue('maxQuantity');
           const quantity = value+sells;
           if (quantity > maxQuantity) {
+            /* eslint-disable-next-line*/
             throw new Error('La cantidad vendida no puede superar el máximo de tickets');
           }
-        }
-      }
+        },
+      },
     },
-    status:{
+    status: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true
-    }
+      defaultValue: true,
+    },
   },
-  { timestamps: false });
+  {timestamps: false});
 };
