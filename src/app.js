@@ -7,12 +7,12 @@ const cors = require('cors');
 
 const server = express();
 server.use(cookieParser());
-server.use(
-    cors({
-      origin: process.env.CLIENT_URL, // reemplaza con la URL de tu cliente
-      credentials: true,
-    }),
-);
+// server.use(
+//     cors({
+//       origin: process.env.CLIENT_URL, // reemplaza con la URL de tu cliente
+//       credentials: true,
+//     }),
+// );
 server.use(bodyParser.urlencoded({extended: true, limit: '50mb'}));
 server.use(bodyParser.json({limit: '50mb'}));
 server.use(morgan('dev'));
