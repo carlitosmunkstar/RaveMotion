@@ -82,6 +82,19 @@ module.exports = (sequelize) => {
           type: DataTypes.BOOLEAN,
           defaultValue: true,
         },
-      },
+        current:{
+            type: DataTypes.BOOLEAN,
+            defaultValue:true,
+            validate:{
+                checkCurrent() {
+                    const currentDate = moment().format('YYYY-MM-DD');
+                    const eventDate = moment(this.date).format('YYYY-MM-DD');
+                    if (moment(eventDate).isBefore(currentDate, 'YYYY-MM-DD')) {
+                      this.current = false;
+                    }
+                }
+            },
+        }
+    }
   );
 };

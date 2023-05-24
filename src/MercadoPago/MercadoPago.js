@@ -21,7 +21,7 @@ const createPayment=async (req,res)=>{
         },
         //auto_return: 'approved',
         binary_mode: true,
-        notification_url:'https://8d38-190-190-121-52.sa.ngrok.io/payments/notifications',
+        notification_url:'https://5d82-190-190-121-52.sa.ngrok.io/payments/notifications',
     };
 
     try {
