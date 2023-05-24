@@ -1,5 +1,6 @@
 require('dotenv').config();
 const {Sequelize} = require('sequelize');
+const  pg = require ('pg');
 const fs = require('fs');
 const path = require('path');
 
@@ -11,6 +12,7 @@ const DB_UL =
 const sequelize = new Sequelize(DB_UL, {
   logging: false,
   native: false,
+  dialectModule: pg
 });
 
 const basename = path.basename(__filename);
