@@ -3,11 +3,11 @@
     "framework": "express",
     "builds": [
         {
-        "src": "/src/app.js",
-        "use": "@vercel/node"
+            "src": "app.js",
+            "use": "@vercel/node"
         }
     ],
-    "routes":[
+    "routes": [
         {
             "src": "/(.*)",
             "dest": "/"
