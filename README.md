@@ -302,7 +302,7 @@ JSON con la info por body
 	"documentType":"DNI",
 	"document":"12548548",
   "birthDay":"2000-04-03",
-	"adress":{
+	"address":{
 		"street":"Calle Falsa",
 		"number":123,
 		"city":"Springfield"
