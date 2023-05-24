@@ -21,3 +21,12 @@ router.post("/signup3", singUp3);
 router.post("/logingoogle", Logingoogle)
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
