@@ -20,7 +20,7 @@ const createPayment=async (req,res)=>{
             }
         ],
         back_urls:{
-      success: `${FRONTEND_URL}`,// aca deberia ir el home
+            success: `http://localhost:5173/tickets`,// va a los tickes del usuario
 			failure: `${FRONTEND_URL}`,// aca deberia ir el home 
         },
         //auto_return: 'approved',
