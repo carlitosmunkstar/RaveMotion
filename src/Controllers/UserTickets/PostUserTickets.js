@@ -32,12 +32,7 @@ const PostTickets = async (req, res) => {
           }
           /* eslint-disable-next-line*/
           const codigo_ticket = uuidv4();
-            // * aumenta en 1 sells de la tanda
-            const tanda=await Ticket.findByPk(ticket.ticketId);
-            console.log('antes',tanda.sells);
-            tanda.sells++;
-            await tanda.save();
-            console.log('despues',tanda.sells);
+
           // Generar el código QR usando la librería qrcode
           const buffer = await qrcode.toBuffer(codigo_ticket, {
             errorCorrectionLevel: 'M',
@@ -70,7 +65,10 @@ const PostTickets = async (req, res) => {
           archivo_temporal.removeCallback();
           // Agregar el ticket a la lista de nuevos tickets con la URL del código QR
 
-          
+          // * aumenta en 1 sells de la tanda
+          const tanda=await Ticket.findByPk(ticket.ticketId);
+          tanda.sells++;
+          await tanda.save();
 
           return {
             ...ticket,
