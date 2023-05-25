@@ -11,7 +11,7 @@ const notifications=async(req,res)=>{
                 const response=await ToPayMP.findByPk(preference_id);
                 const {tickets, send}=response.dataValues
                 if(!send){
-                    await axios.post('http://localhost:3001/userTickets/newUserTickets', {tickets:tickets})
+                    await axios.post('https://ravemotionback-production.up.railway.app/userTickets/newUserTickets', {tickets:tickets})
                     await response.update({send:true})
                 }
             }

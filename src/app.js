@@ -3,16 +3,11 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const routes = require('./Routes/index.js');
-// const cors = require('cors');
+
 
 const server = express();
 server.use(cookieParser());
-// server.use(
-//     cors({
-//       origin: process.env.CLIENT_URL, // reemplaza con la URL de tu cliente
-//       credentials: true,
-//     }),
-// );
+
 server.use(bodyParser.urlencoded({extended: true, limit: '50mb'}));
 server.use(bodyParser.json({limit: '50mb'}));
 server.use(morgan('dev'));
@@ -40,4 +35,5 @@ server.use((err, req, res, next) => {
 });
 
 module.exports = server;
+
 
