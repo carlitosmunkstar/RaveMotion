@@ -8,17 +8,14 @@ const getEventByUserId = async (req, res) => {
           userId: userId,
           status: true
         },
-        // include: [
-        //   {
-        //     model: Ticket,
-        //     required: false,
-        //     where: { eventId: eventId }
-        //   }
-        // ]
+        include: [
+            {
+              model: Ticket,
+              required: false // Opcional, dependiendo de tus necesidades
+            }
+          ]
       });
-    /*-eventos:Array
-    -data: ventas del ultimo mes o ultima semana.
-    -porcentaje: -->ticketsvendidos */
+
     if (event) {
       return res.status(200).json(event);
     }
