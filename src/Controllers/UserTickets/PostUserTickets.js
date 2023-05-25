@@ -97,7 +97,6 @@ const PostTickets = async (req, res) => {
         });
         await sendEmailWithQrCode(newTicket);
       });
-      console.log('LLEGUEEEEE');
 
       res.status(200).json(createdTickets);
     } else {
