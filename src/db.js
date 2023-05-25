@@ -1,20 +1,15 @@
 require('dotenv').config();
 const {Sequelize} = require('sequelize');
-const  pg = require ('pg');
 const fs = require('fs');
 const path = require('path');
 
-// console.log(pg)
+// const {DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE} = process.env;
 
-const {DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE} = process.env;
-const DB_UL =
-     process.env.DB_URL ||
-    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`;
+const DB_UL =process.env.DB_URL
 
 const sequelize = new Sequelize(DB_UL, {
   logging: false,
   native: false,
-  dialectModule: pg
 });
 
 const basename = path.basename(__filename);
