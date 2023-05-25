@@ -11,7 +11,7 @@ const getEventByUserId = async (req, res) => {
         include: [
             {
               model: Ticket,
-              required: false // Opcional, dependiendo de tus necesidades
+              required: false
             }
           ]
       });
