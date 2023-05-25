@@ -4,6 +4,7 @@ const mercadopago=require('mercadopago')
 const { MP_TOKEN } = process.env;
 const BACKEND_URL = process.env.BACKEND_URL;
 const FRONTEND_URL = process.env.FRONTEND_URL;
+const {CLIENT_URL_SUCCESS,CLIENT_URL_FAILURE}=process.env
 
 
 mercadopago.configure({access_token:MP_TOKEN})
@@ -20,8 +21,8 @@ const createPayment=async (req,res)=>{
             }
         ],
         back_urls:{
-            success: `http://localhost:5173/tickets`,// va a los tickes del usuario
-			failure: `${FRONTEND_URL}`,// aca deberia ir el home 
+            success: `${CLIENT_URL_SUCCESS}`,// va a los tickes del usuario
+			failure: `${CLIENT_URL_FAILURE}`,// aca deberia ir el home 
         },
         //auto_return: 'approved',
         binary_mode: true,
