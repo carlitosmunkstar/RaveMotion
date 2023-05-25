@@ -8,6 +8,7 @@ const putEvents = require('../Controllers/Events/PutEvents');
 
 const getEventByFilter = require('../Controllers/Events/getEventsFilters');
 const getDeletedEvents = require('../Controllers/Events/GetDeleted');
+const getEventByUserId =require('../Controllers/Events/getEventsByUserId');
 /* eslint-disable-next-line*/
 const router = Router();
 
@@ -20,5 +21,6 @@ router.get('/:id', getEventById);
 router.post('/eventcreate', createEvents);
 router.put('/:id', putEvents);
 router.delete('/eventsdelete/:id', deleteEvents);
+router.get('/eventbyuserid/:userId', getEventByUserId);
 
 module.exports = router;
