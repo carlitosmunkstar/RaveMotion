@@ -33,7 +33,7 @@ res.status(200).json({
       accessType: user.accessType,
       firstName: user.firstName, 
   },
-  jwt:tokenGoogle ,
+  jwt:tokenGoogle , 
 });}
 catch (error) {
 res.status(500).json({ error: error.message });
