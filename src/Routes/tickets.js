@@ -5,10 +5,12 @@ const getTicketsById = require('../Controllers/Tickets/GetTicketsById');
 const PutTickets =require('../Controllers/Tickets/PutTickets');
 const setTicketsStock = require('../Controllers/Tickets/setTicketsStock');
 const subStrackSells = require('../Controllers/Tickets/subtractSetSells');
+const getTicketsSells = require('../Controllers/Tickets/getSellsTickets');
 /* eslint-disable-next-line*/
 const router = Router();
 
 router.get('/', getTickets);
+router.get('/sellstickets/:userId', getTicketsSells);
 router.get('/ticketsByEvent/:eventId', getTicketsById);
 router.post('/createtickets', createTickets);
 router.put('/updatetickets/:ticketId', PutTickets);
