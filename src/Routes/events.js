@@ -5,6 +5,7 @@ const createEvents = require('../Controllers/Events/createEvents');
 const getEventById = require('../Controllers/Events/GetEventById');
 const deleteEvents = require('../Controllers/Events/DeleteEvents');
 const putEvents = require('../Controllers/Events/PutEvents');
+const getEventByUserId = require('../Controllers/Events/getEventsByUserId')
 
 const getEventByFilter = require('../Controllers/Events/getEventsFilters');
 const getDeletedEvents = require('../Controllers/Events/GetDeleted');
@@ -13,6 +14,7 @@ const router = Router();
 
 
 router.get('/', getEvents);
+router.get('/eventbyuserid/:userId', getEventByUserId)
 router.get('/name', getEventByName);
 router.get('/deleted', getDeletedEvents);
 router.get('/filter', getEventByFilter); // FUTUROS FILTROS COMBINADOS
@@ -22,3 +24,5 @@ router.put('/:id', putEvents);
 router.delete('/eventsdelete/:id', deleteEvents);
 
 module.exports = router;
+
+

@@ -1,6 +1,10 @@
+require('dotenv').config();
 const {ToPayMP}=require('../db')
 const mercadopago=require('mercadopago')
 const { MP_TOKEN } = process.env;
+const BACKEND_URL = process.env.BACKEND_URL;
+const FRONTEND_URL = process.env.FRONTEND_URL;
+
 
 mercadopago.configure({access_token:MP_TOKEN})
 
@@ -16,12 +20,12 @@ const createPayment=async (req,res)=>{
             }
         ],
         back_urls:{
-            success: 'http://localhost:5173/',
-			failure: "http://localhost:5173/",
+      success: `${FRONTEND_URL}`,// aca deberia ir el home
+			failure: `${FRONTEND_URL}`,// aca deberia ir el home 
         },
         //auto_return: 'approved',
         binary_mode: true,
-        notification_url:'https://5d82-190-190-121-52.sa.ngrok.io/payments/notifications',
+        notification_url:`${BACKEND_URL}/payments/notifications`,
     };
 
     try {
