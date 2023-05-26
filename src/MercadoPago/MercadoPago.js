@@ -20,7 +20,7 @@ const createPayment=async (req,res)=>{
             }
         ],
         back_urls:{
-            success: `${FRONTEND_URL}`,// aca deberia ir el home
+      success: `${FRONTEND_URL}`,// aca deberia ir el home
 			failure: `${FRONTEND_URL}`,// aca deberia ir el home 
         },
         //auto_return: 'approved',

@@ -19,7 +19,7 @@ const singIn = async (req, res) => {
           .status(400)
           .json({error: 'Las credenciales no son válidas.'});
     }
-
+  
     // Verificar la contraseña
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
@@ -44,7 +44,7 @@ const singIn = async (req, res) => {
       user: {
         id: user.id,
         email: user.mail,
-        accessType: user.accessType,
+        accessType: user.accessType, 
         firstName: user.firstName,
       },
       jwt: token,
