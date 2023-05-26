@@ -53,8 +53,22 @@ const SingInSession = async (req, res) => {
       console.error('Error al buscar el usuario:', dbError);
       res.status(500).json({error: 'Error al buscar el usuario en la base de datos.'});
     }
+<<<<<<< HEAD
   } catch (jwtError) {
     console.error('Error con el token:', jwtError);
+=======
+
+    // Aquí puedes realizar cualquier verificación adicional del usuario si es necesario
+
+    // Si todo es exitoso, devuelve los datos del usuario
+    res.status(200).json({
+      id: user.id,
+      email:user.mail,
+      firstName: user.firstName,
+      accessType: user.accessType,
+    });
+  } catch (error) {
+>>>>>>> 02ddebca9c75d19172413e789cc5dd81fa4beb74
     res.status(401).json({error: 'Token inválido.'});
   }
 };
