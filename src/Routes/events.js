@@ -6,7 +6,7 @@ const getEventById = require('../Controllers/Events/GetEventById');
 const deleteEvents = require('../Controllers/Events/DeleteEvents');
 const putEvents = require('../Controllers/Events/PutEvents');
 const getEventByUserId = require('../Controllers/Events/getEventsByUserId')
-
+const finalizedEvents = require("../Controllers/Events/FinalizedEvents")
 const getEventByFilter = require('../Controllers/Events/getEventsFilters');
 const getDeletedEvents = require('../Controllers/Events/GetDeleted');
 /* eslint-disable-next-line*/
@@ -14,6 +14,7 @@ const router = Router();
 
 
 router.get('/', getEvents);
+router.get('/finalized', finalizedEvents);
 router.get('/eventbyuserid/:userId', getEventByUserId)
 router.get('/name', getEventByName);
 router.get('/deleted', getDeletedEvents);
