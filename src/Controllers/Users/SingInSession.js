@@ -42,7 +42,7 @@ const SingInSession = async (req, res) => {
       // Si todo es exitoso, devuelve los datos del usuario
       res.status(200).json({
         id: user.id,
-        mail: user.mail,
+        email: user.mail,
         firstName: user.firstName,
         accessType: user.accessType,
       });
