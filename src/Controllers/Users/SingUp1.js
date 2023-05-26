@@ -3,6 +3,7 @@ const { User } = require("../../db");
 // Verifiacion del email en la bdd
 const singUp1 = async (req, res) => {
     const { email } = req.body;
+    console.log(req.body)
     try {
         const existingUser = await User.findOne({
             where: { email: email },

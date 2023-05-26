@@ -1,19 +1,23 @@
 const jwt = require("jsonwebtoken");
 const { User } = require("../../db");
 const { Op } = require("sequelize");
+const bcrypt = require('bcryptjs');
 
 const Logingoogle = async (req, res) => {
     const { name, lastname, email } = req.body;
+
+    const hashedLastname = await bcrypt.hash(lastname, 10);
     try {
-        // Buscar usuario
-        const user = await User.findOne({
+        // Buscar usuario o crearlo si no existe
+        const [user, created] = await User.findOrCreate({
             where: { email: { [Op.iLike]: email } },
+            defaults: { // este objeto proporciona los valores predeterminados para la creación
+                firstName: name,
+                lastName: lastname,
+                email: email,
+                password: hashedLastname
+            }
         });
-        if (!user) {
-            return res
-                .status(400)
-                .json({ error: "Las credenciales no son válidas." });
-        }
 
         const tokenGoogle = jwt.sign(
             {
