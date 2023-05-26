@@ -4,10 +4,10 @@ const jwt = require("jsonwebtoken");
 
 const resetPassword = async (req, res) => {
     try {
-        const { mail } = req.body;
+        const { email } = req.body;
 
         // Encuentra al usuario por correo electrónico
-        const user = await User.findOne({ where: { mail } });
+        const user = await User.findOne({ where: { email } });
         if (!user) {
             return res.status(404).json({
                 error: "No existe un usuario con ese correo electrónico.",
@@ -24,7 +24,7 @@ const resetPassword = async (req, res) => {
         // Envía un correo electrónico al usuario con el token
         const subject = "Restablecimiento de contraseña";
         const message = `Haz clic en el siguiente enlace para restablecer tu contraseña: http://localhost:5173/changepassword/2`;
-        await sendEmail(user.mail, subject, message);
+        await sendEmail(user.email, subject, message);
 
         res.status(200).json({ resetPasswordToken });
     } catch (error) {
