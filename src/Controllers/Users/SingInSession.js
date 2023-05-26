@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
-const jwt = require('jsonwebtoken');
-const {User} = require('../../db');
+
 
 // const SingInSession=  async (req, res) => {
 //     const token = req.cookies.jwt;
@@ -20,32 +19,39 @@ const {User} = require('../../db');
 //     });
 // };
 // module.exports = SingInSession
+const jwt = require('jsonwebtoken');
+const {User} = require('../../db');
 
 const SingInSession = async (req, res) => {
   const {token} = req.body;
-
   try {
     // Verificar el token
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    console.log('Token decodificado:', decodedToken);
 
-    // Obtener los datos del usuario a partir del token decodificado
-    const user = await User.findOne({
-      where: {mail: decodedToken.email},
-    });
+    try {
+      // Obtener los datos del usuario a partir del token decodificado
+      const user = await User.findOne({
+        where: {mail: decodedToken.email},
+      });
 
-    if (!user) {
-      return res.status(404).json({error: 'Usuario no encontrado.'});
+      if (!user) {
+        return res.status(404).json({error: 'Usuario no encontrado.'});
+      }
+
+      // Si todo es exitoso, devuelve los datos del usuario
+      res.status(200).json({
+        id: user.id,
+        email: user.mail,
+        firstName: user.firstName,
+        accessType: user.accessType,
+      });
+
+    } catch (dbError) {
+      console.error('Error al buscar el usuario:', dbError);
+      res.status(500).json({error: 'Error al buscar el usuario en la base de datos.'});
     }
-
-    // Aquí puedes realizar cualquier verificación adicional del usuario si es necesario
-
-    // Si todo es exitoso, devuelve los datos del usuario
-    res.status(200).json({
-      id: user.id,
-      email:user.mail,
-      firstName: user.firstName,
-      accessType: user.accessType,
-    });
+    
   } catch (error) {
     res.status(401).json({error: 'Token inválido.'});
   }

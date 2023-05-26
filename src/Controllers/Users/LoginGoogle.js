@@ -8,17 +8,17 @@ const Logingoogle=  async (req, res) => {
     // Buscar usuario
     const user = await User.findOne({
         where: { mail: { [Op.iLike]: mail } },
-    });
-    if (!user) { 
+    }); 
+    if (!user) {  
         return res
             .status(400)
             .json({ error: "Las credenciales no son válidas." });
     }
 
-const token = jwt.sign(
+const tokenGoogle = jwt.sign(
   {
       id: user.id,
-      mail: user.mail,
+      email: user.mail,
       accessType: user.accessType,
       firstName: user.firstName,
   },
@@ -29,11 +29,11 @@ const token = jwt.sign(
 res.status(200).json({
   user: {
       id: user.id,
-      mail: user.mail,
+      email: user.mail,
       accessType: user.accessType,
-      firstName: user.firstName,
+      firstName: user.firstName, 
   },
-  jwt:token,
+  jwt:tokenGoogle , 
 });}
 catch (error) {
 res.status(500).json({ error: error.message });
