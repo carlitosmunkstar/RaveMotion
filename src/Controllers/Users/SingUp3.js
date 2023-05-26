@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const {User} = require('../../db');
-
+const sendEmail = require('../../Services/emailService');
 // Método de registro
 const singUp3 = async (req, res) => {
   const {
@@ -33,7 +33,9 @@ const singUp3 = async (req, res) => {
       accessType,
       status,
     });
-
+    const subject = 'Registro exitoso';
+    const message = `Te has registrado exitosamente a Rave Motion, Bienvenido`;
+    await sendEmail(newUser.mail, subject, message);
     // Enviar respuesta
     res.status(201).json(newUser);
   } catch (error) {
