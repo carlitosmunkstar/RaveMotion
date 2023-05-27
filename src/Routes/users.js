@@ -7,10 +7,12 @@ const SingInSession = require("../Controllers/Users/SingInSession");
 const ResetPassword = require("../Controllers/Users/ResetPassword");
 const ConfirmResetPassword = require("../Controllers/Users/ConfirmResetPassword");
 const signOut = require("../Controllers/Users/SignOut");
-const Logingoogle = require("../Controllers/Users/LoginGoogle")
+const Logingoogle = require("../Controllers/Users/LoginGoogle");
+const getUserEvents = require("../Controllers/Users/getUserEvents");
 const router = Router();
 
 router.get("/signout", signOut);
+router.get("/userevents/:userId", getUserEvents)
 router.post("/signin", singIn);
 router.post("/signinsession", SingInSession);
 router.post("/resetpassword", ResetPassword);
