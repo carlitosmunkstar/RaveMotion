@@ -26,7 +26,6 @@ const SingInSession = async (req, res) => {
     try {
         // Verificar el token
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-        console.log("Token decodificado:", decodedToken);
 
         try {
             // Obtener los datos del usuario a partir del token decodificado
