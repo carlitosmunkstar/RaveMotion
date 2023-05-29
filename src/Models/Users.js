@@ -51,27 +51,23 @@ module.exports = (sequelize) => {
         },
         documentType: {
             /* eslint-disable-next-line*/
-            type: DataTypes.ENUM("DNI", "Pasaporte", "Cedula",""),
+            type: DataTypes.ENUM("DNI", "Pasaporte", "Cedula"),
             allowNull: true,
-            defaultValue: "",
         },
         document: {
             type: DataTypes.STRING,
             allowNull: true,
-            defaultValue: "",
             validate: {
                 len: [0, 10],
             },
         },
         birthDay: {
             type: DataTypes.DATE,
-            defaultValue: "11/11/1111",
             allowNull: true,
          
         },
         address: {
             type: DataTypes.JSON,
-            defaultValue: "",
             allowNull: true,
         },
         accessType: {
