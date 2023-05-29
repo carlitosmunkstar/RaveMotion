@@ -16,7 +16,7 @@ router.post('/createtickets', createTickets);
 router.put('/updatetickets/:ticketId', PutTickets);
 
 // control de Stock
-router.put('/setsumstock/:ticketId', setTicketsStock);
+router.put('/setsumstock', setTicketsStock);
 router.put('/substracksells/:ticketId', subStrackSells);
 
 
