@@ -1,20 +1,17 @@
-const {Op} = require('sequelize');
 const {Event} = require('../../db.js');
-const moment = require('moment');
-
+const { updateCurrentStatus } = require ("./UpdateBdd.js")
 const finalizedEvents = async (req, res) => {
+
   try {
-    const currentDate = moment().format('YYYY-MM-DD');
+    await updateCurrentStatus();
     const finishedEvents = await Event.findAll({
       where: {
         current: false,
-        date: {
-          [Op.lt]: currentDate
-        }
       }
     });
     res.status(200).json(finishedEvents);
   } catch (error) {
+    console.error(error); 
     res.status(500).json({error: error.message});
   }
 };
