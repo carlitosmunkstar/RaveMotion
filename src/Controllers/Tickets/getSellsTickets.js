@@ -40,6 +40,7 @@ const getTicketsSells = async (req, res) => {
         ticketsArray.push({
             name: t.name,
             maxq: t.maxQuantity,
+            accesType:t.accessType,
             sells: t.sells,
             ticketId: t.id,
             price: t.price,
@@ -50,9 +51,7 @@ const getTicketsSells = async (req, res) => {
       }));
 
       return {
-        events: [
-          {
-            name: e.name,
+        events: e.name,
             eventId: e.id,
             date: e.date,
             hour: e.hour,
@@ -60,8 +59,6 @@ const getTicketsSells = async (req, res) => {
             totalAmount: totalEventAmount,
             totalTicketSells: totalEventsSells,
             tickets: ticketsArray
-          }
-        ]
       };
     });
 
