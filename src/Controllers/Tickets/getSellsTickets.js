@@ -5,11 +5,13 @@ const getTicketsSells = async (req, res) => {
 
   try {
     const events = await Event.findAll({
-      where: {
-        userId: userId,
-        status: true
-      },
-    });
+            where: {
+              [Op.and]: [
+                { userId: userId },
+                { status: true }
+              ]
+            }
+          });
 
     const ticketsPromises = events.map(async (e) => {
       const tickets = await Ticket.findAll({
@@ -69,6 +71,4 @@ const getTicketsSells = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
-  
   module.exports = getTicketsSells;
