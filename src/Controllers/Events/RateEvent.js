@@ -14,9 +14,9 @@ const rateEvent = async(req,res) => {
             }
         });
         if(isBuyer.length){
-            const rate = await Event.findByPk(id);
-            rate.rating = rate.rating + rating;
-            rate.ricardo++;
+            const rate=await Event.findByPk(id);
+            rate.rating=rate.rating+rating;
+            rate.critics++;
             await rate.save();
             res.status(200).json(rate);
         }else{
