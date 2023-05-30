@@ -76,6 +76,7 @@ module.exports = (sequelize) => {
             allowNull: false,
             defaultValue: "user",
         },
+        
         status: {
             type: DataTypes.BOOLEAN,
             defaultValue: true,
