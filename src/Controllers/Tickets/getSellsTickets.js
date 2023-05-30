@@ -1,5 +1,5 @@
 const {Ticket,Event}=require('../../db')
-
+const {Op}=require('sequelize');
 const getTicketsSells = async (req, res) => {
     const {userId} = req.params;
     const allTicketsEvents = []
@@ -10,8 +10,13 @@ const getTicketsSells = async (req, res) => {
     const allSellsLastDate=[]
     try {
         const events = await Event.findAll({
-            where: {userId: userId},
-        });
+            where: {
+              [Op.and]: [
+                { userId: userId },
+                { status: true }
+              ]
+            }
+          });
         await Promise.all(events.map( async e => {
         let tickets = await Ticket.findAll({where: { eventId:e.dataValues.id}});
         tickets.forEach((t) => {
