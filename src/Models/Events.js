@@ -94,6 +94,12 @@ module.exports = (sequelize) => {
                     }
                 }
             },
+        },
+        rating:{
+            type:DataTypes.INTEGER,
+        },
+        critics:{
+            type:DataTypes.INTEGER
         }
     }
   );
