@@ -98,7 +98,7 @@ module.exports = (sequelize) => {
         rating:{
             type:DataTypes.INTEGER,
         },
-        ricardo:{
+        critics:{
             type:DataTypes.INTEGER
         }
     }
