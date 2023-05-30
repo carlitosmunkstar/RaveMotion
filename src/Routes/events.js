@@ -9,6 +9,7 @@ const getEventByUserId = require('../Controllers/Events/getEventsByUserId')
 const finalizedEvents = require("../Controllers/Events/FinalizedEvents")
 const getEventByFilter = require('../Controllers/Events/getEventsFilters');
 const getDeletedEvents = require('../Controllers/Events/GetDeleted');
+const rateEvent = require('../Controllers/Events/RateEvent');
 /* eslint-disable-next-line*/
 const router = Router();
 
@@ -21,6 +22,7 @@ router.get('/deleted', getDeletedEvents);
 router.get('/filter', getEventByFilter); // FUTUROS FILTROS COMBINADOS
 router.get('/:id', getEventById);
 router.post('/eventcreate', createEvents);
+router.put('/rating', rateEvent)
 router.put('/:id', putEvents);
 router.delete('/eventsdelete/:id', deleteEvents);
 
