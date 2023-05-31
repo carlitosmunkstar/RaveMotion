@@ -17,8 +17,9 @@ router.post('/createtickets', createTickets);
 router.put('/updatetickets/:ticketId', PutTickets);
 router.delete('/ticketdelete/:id', deleteTicket)
 // control de Stock
-router.put('/setsumstock', setTicketsStock);
-router.put('/substracksells/:ticketId', subStrackSells);
+router.post('/setsumstock', setTicketsStock);
+router.post('/substracksells', subStrackSells);
 
 
 module.exports = router;
+
