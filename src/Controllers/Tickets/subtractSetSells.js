@@ -3,31 +3,19 @@ const {Ticket} = require('../../db.js');
 
 const subStrackSells= async (req, res)=>{
   try {
-    const ticketId = req.params.ticketId;
-    const {reservation} = req.body;
 
-    if (!ticketId) {
-      /* eslint-disable-next-line*/
-      res.status(400).json({error: 'Debe proporcionar el ID de los tickets en el parámetro.'});
-      return;
+    const { aux } = req.body;
+    for (const ticket of aux) { 
+      const TandaTicket = await Ticket.findByPk(ticket.id);
+      if (TandaTicket.reservation - ticket.quantity >=0) {
+        TandaTicket.reservation -= ticket.quantity;
+        await TandaTicket.save();
+      } else {
+        TandaTicket.reservation = 0;
+      }
     }
 
-    const TandaTicket = await Ticket.findByPk(ticketId);
-
-    if (TandaTicket.reservation - reservation >=0) {
-      TandaTicket.reservation -= reservation;
-    } else {
-      TandaTicket.reservation = 0;
-    }
-
-    await TandaTicket.save();
-    if (!TandaTicket) {
-      /* eslint-disable-next-line*/
-      res.status(404).json({error: 'No se encontraron tickets con el ID proporcionado.'});
-      return;
-    }
-
-    res.status(200).json({TandaTicket});
+    res.status(200).json("Reserva modificada con exito");
   } catch (error) {
     res.status(500).json({error: error.message});
   }
