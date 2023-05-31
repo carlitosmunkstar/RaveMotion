@@ -25,7 +25,7 @@ router.get('/:id', getEventById);
 router.get('/rating/:id', getEventRating);
 router.post('/eventcreate', createEvents);
 router.put('/rating', rateEvent)
-router.put('/:id', putEvents);
+router.put('/putEvent/:id', putEvents);
 router.delete('/eventsdelete/:id', deleteEvents);
 
 module.exports = router;
