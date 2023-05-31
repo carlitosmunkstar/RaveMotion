@@ -23,7 +23,7 @@ router.get('/filter', getEventByFilter); // FUTUROS FILTROS COMBINADOS
 router.get('/:id', getEventById);
 router.post('/eventcreate', createEvents);
 router.put('/rating', rateEvent)
-router.put('/:id', putEvents);
+router.put('/putEvent/:id', putEvents);
 router.delete('/eventsdelete/:id', deleteEvents);
 
 module.exports = router;
