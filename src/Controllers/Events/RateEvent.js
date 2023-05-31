@@ -1,4 +1,4 @@
-const {Event, TicketsSold} = require('../../db');
+const { Event, TicketsSold, sequelize } = require('../../db');
 const {Op} = require('sequelize');
 
 const rateEvent = async (req, res) => {
@@ -15,12 +15,22 @@ const rateEvent = async (req, res) => {
     });
 
     if (isBuyer.length) {
-      const event = await Event.findByPk(id);
-      event.rating = event.rating + rating;
-      event.critics++;
-      event.averageRating = event.rating / event.critics;
-      await event.save();
-      res.status(200).json("Puntuaje Actualizado");
+      const transaction = await sequelize.transaction();
+
+      try {
+        const event = await Event.findByPk(id, { transaction });
+        event.rating = event.rating + rating;
+        event.critics++;
+        event.averageRating = event.rating / event.critics;
+        await event.save({ transaction });
+        
+        await transaction.commit();
+
+        res.status(200).json("Puntuaje Actualizado");
+      } catch (error) {
+        await transaction.rollback();
+        throw error;
+      }
     } else {
       res.status(400).json('El usuario no compro entradas para este evento')
     }
