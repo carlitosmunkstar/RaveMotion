@@ -102,7 +102,7 @@ module.exports = (sequelize) => {
             type:DataTypes.INTEGER
         },
         averageRating:{
-          type:DataTypes.INTEGER,
+          type:DataTypes.FLOAT,
           defaultValue: 0
       }
     }
