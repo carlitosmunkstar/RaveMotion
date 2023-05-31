@@ -18,6 +18,7 @@ const rateEvent = async (req, res) => {
       const event = await Event.findByPk(id);
       event.rating = event.rating + rating;
       event.critics++;
+      event.averageRating = event.rating / event.critics;
       await event.save();
       res.status(200).json("Puntuaje Actualizado");
     } else {
