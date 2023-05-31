@@ -100,7 +100,11 @@ module.exports = (sequelize) => {
         },
         critics:{
             type:DataTypes.INTEGER
-        }
+        },
+        averageRating:{
+          type:DataTypes.INTEGER,
+          defaultValue: 0
+      }
     }
   );
 };

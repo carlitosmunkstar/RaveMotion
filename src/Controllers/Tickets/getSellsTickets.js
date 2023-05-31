@@ -1,4 +1,5 @@
 const {Ticket,Event,TicketsSold }=require('../../db')
+const {Op}=require('sequelize');
 
 const getTicketsSells = async (req, res) => {
   const { userId } = req.params;

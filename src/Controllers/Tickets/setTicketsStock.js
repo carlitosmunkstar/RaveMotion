@@ -1,39 +1,31 @@
 /* eslint-disable max-len */
 const {Ticket} = require('../../db.js');
 
-const setTicketsStock= async (req, res)=>{
+const setTicketsStock = async (req, res) => {
   try {
-    const ticketId = req.params.ticketId;
-    const {reservation} = req.body;
+    const { aux } = req.body;
+    
+    for (const ticket of aux) { 
+      const TandaTicket = await Ticket.findByPk(ticket.id);
 
-    if (!ticketId) {
-      res.status(400).json({error: 'Debe proporcionar el ID de los tickets en el parámetro.'});
-      return;
+      const maxQuantity = TandaTicket.dataValues.maxQuantity;
+      const TotalTicketsreservation = TandaTicket.dataValues.sells + TandaTicket.dataValues.reservation + ticket.quantity;
+
+      if (TotalTicketsreservation > maxQuantity) {
+        res.status(400).json({error: `No hay Stock de tickets para la reserva de tickets: ${TandaTicket.name}.`});
+        return;
+      }
     }
 
-    const TandaTicket = await Ticket.findByPk(ticketId);
-    if (!TandaTicket) {
-      res.status(404).json({error: 'No se encontraron tickets con el ID proporcionado.'});
-      return;
+    for (const ticket of aux) {
+      const TandaTicket = await Ticket.findByPk(ticket.id);
+      TandaTicket.reservation += ticket.quantity;
+      await TandaTicket.save();
     }
-
-    const maxQuantity = TandaTicket.maxQuantity;
-    const TotalTicketsreservation = TandaTicket.sells + TandaTicket.reservation + reservation;
-    const reservasStock = maxQuantity - TandaTicket.sells - TandaTicket.reservation;
-
-    // control se Stock
-    if (TotalTicketsreservation > maxQuantity) {
-      res.status(400).json({error: `No hay Stock para generar esa reserva. La cantidad de disponible para ${TandaTicket.name} es de ${reservasStock} tickets.`});
-      return;
-    }
-
-    TandaTicket.reservation += reservation;
-    await TandaTicket.save();
-
-    res.status(200).json({TandaTicket});
+    res.status(200).json("Reserva realizada");
   } catch (error) {
-    res.status(500).json({error: error.message});
+    res.status(500).json({ error: error.message });
   }
 };
 
-module.exports=setTicketsStock;
+module.exports = setTicketsStock;
