@@ -60,6 +60,7 @@ const createEvents = async (req, res) => {
                     }
                 })
                 .catch((err) => {
+                    console.error(error);
                     res.status(500).json({ error: err.message });
                 });
         }
