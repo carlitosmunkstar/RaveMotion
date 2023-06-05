@@ -3,7 +3,6 @@ const { User } = require("../../db.js");
 const updateUserByEmail = async (req, res) => {
     //const { email } = req.params;
     const updatedUserData = req.body;
-    console.log(updatedUserData);
     try {
         const user = await User.findOne({
             where: { email: updatedUserData.email },
